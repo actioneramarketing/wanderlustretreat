@@ -1,0 +1,55 @@
+/**
+ * Centralized retreat facts.
+ * Update dates, pricing, and site URL here as details are confirmed.
+ */
+
+export const siteConfig = {
+  name: "The Wanderlust Revival Retreat",
+  shortName: "Wanderlust Revival",
+  /** Set when the production domain is known, e.g. "https://wanderlustrevival.com" */
+  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  description:
+    "Revive your life, health, relationships, and business during an immersive seven-night retreat at Villa Wanderlust in Costa Rica.",
+};
+
+/**
+ * Retreat dates — year intentionally omitted until confirmed.
+ * When ready, set `year` (e.g. 2027) and update `display` / `eyebrow` accordingly.
+ */
+export const retreatDates = {
+  /** Leave null until the retreat year is confirmed */
+  year: null as number | null,
+  startMonth: "May",
+  startDay: 30,
+  endMonth: "June",
+  endDay: 6,
+  /** Primary display string used across the site */
+  display: "May 30–June 6",
+  eyebrow: "MAY 30–JUNE 6 • COSTA RICA",
+  nights: 7,
+};
+
+export const retreatLocation = {
+  venue: "Villa Wanderlust",
+  region: "Costa Rica",
+  area: "Near Jacó and the Pacific Coast",
+  shortLine: "Villa Wanderlust • Near Jacó, Costa Rica",
+  footerLine: "Villa Wanderlust, Costa Rica",
+};
+
+export const retreatInvestment = {
+  min: 7500,
+  max: 9000,
+  display: "$7,500–$9,000",
+  rangeLabel: "Retreat experiences from $7,500 to $9,000",
+  note: "Accommodation and participation options will be reviewed during the invitation process.",
+};
+
+export const retreatTheme = {
+  primary: "Revival of Life, Health, Relationships, and Business",
+  positioning:
+    "This is not simply a vacation or a traditional business retreat. It is a seven-night immersive experience combining restoration, adventure, contribution, connection, personal clarity, wellness, meaningful conversation, and renewed business vision.",
+};
+
+export const disclaimer =
+  "Retreat experiences, activities, leaders, schedules, inclusions, accommodations, and pricing are subject to final confirmation and availability.";
