@@ -3,11 +3,13 @@
  * Update dates, pricing, and site URL here as details are confirmed.
  */
 
+import { getSiteUrl } from "@/lib/site-url";
+
 export const siteConfig = {
   name: "The Wanderlust Revival Retreat",
   shortName: "Wanderlust Revival",
-  /** Set when the production domain is known, e.g. "https://wanderlustrevival.com" */
-  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  /** Resolved from NEXT_PUBLIC_SITE_URL, Vercel production URL, or localhost */
+  url: getSiteUrl(),
   description:
     "Revive your life, health, relationships, and business during an immersive seven-night retreat at Villa Wanderlust in Costa Rica.",
 };

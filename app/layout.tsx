@@ -5,6 +5,7 @@ import { MobileStickyCta } from "@/components/layout/MobileStickyCta";
 import { Navigation } from "@/components/layout/Navigation";
 import { SkipToContent } from "@/components/layout/SkipToContent";
 import { siteConfig } from "@/data/retreat";
+import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -20,9 +21,7 @@ const cormorant = Cormorant_Garamond({
   style: ["normal", "italic"],
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-
+const siteUrl = getSiteUrl();
 const siteTitle = "The Wanderlust Revival Retreat | Costa Rica";
 const siteDescription =
   "Revive your life, health, relationships, and business during an immersive seven-night retreat at Villa Wanderlust in Costa Rica.";
@@ -47,6 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
+    url: "/",
     siteName: "The Wanderlust Revival Retreat",
     title: siteTitle,
     description: siteDescription,

@@ -25,10 +25,21 @@ cp .env.example .env.local
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Recommended for production | Canonical URL, Open Graph, sitemap, robots |
+| `NEXT_PUBLIC_SITE_URL` | Recommended for production | Canonical URL, Open Graph absolute image URLs, sitemap, robots |
 | `RESEND_API_KEY` | Required for inquiry email | Resend API authentication |
 | `RETREAT_INQUIRY_TO_EMAIL` | Required for inquiry email | Inbox that receives inquiries |
 | `RETREAT_INQUIRY_FROM_EMAIL` | Required for inquiry email | Verified Resend sender address |
+
+#### `NEXT_PUBLIC_SITE_URL`
+
+This is a public website URL only — not a secret.
+
+- Local development: `http://localhost:3000`
+- Vercel production: set it to the final public site URL, including `https://`
+- Example: `NEXT_PUBLIC_SITE_URL=https://yourdomain.com`
+- Redeploy after changing the variable so Open Graph tags pick up the new absolute URLs
+
+If unset, the app falls back to `VERCEL_PROJECT_PRODUCTION_URL` (when available), then `http://localhost:3000`.
 
 If email variables are missing, the site still loads. The inquiry form will show a clear configuration message instead of silently pretending the submission succeeded.
 
@@ -63,6 +74,15 @@ npm run lint
 
 After the domain is known, set `NEXT_PUBLIC_SITE_URL` to the production URL (including `https://`) and redeploy.
 
+### Social preview caching
+
+Facebook, LinkedIn, X, iMessage, Slack, and other platforms often cache an older link preview. After deploying a new Open Graph image:
+
+1. Confirm the image opens at `https://yourdomain.com/images/retreat/wanderlust-revival-social-share.png`
+2. Re-scrape the URL in the platform’s sharing debugger, or temporarily share with a cache-busting query such as `https://yourdomain.com/?v=2`
+
+Do not add that query string to canonical metadata — it is only for testing refreshed previews.
+
 ## Project structure
 
 ```text
@@ -73,6 +93,8 @@ components/ui/           # Shared UI primitives
 data/                    # Centralized retreat content
 lib/                     # Utilities, email helpers, rate limiting
 public/images/retreat/   # Optimized local photography
+public/images/branding/  # Logo assets
+public/images/leaders/   # Leader portraits
 ```
 
 ## Editing retreat content
@@ -134,29 +156,19 @@ The API route lives at `app/api/inquiry/route.ts`. It includes honeypot spam pro
 
 ## Images
 
-Retreat photography is stored in:
-
 ```text
-public/images/retreat/
+public/images/branding/wanderlust-revival-logo.png
+public/images/leaders/kristen-becher.jpg
+public/images/retreat/wanderlust-revival-social-share.png
+public/images/retreat/   # retreat photography
+app/opengraph-image.png  # App Router OG convention (same social art)
+app/twitter-image.png    # App Router Twitter convention (same social art)
+app/icon.png             # favicon
 ```
 
-Current files:
+Retreat photography files include `hero-pool-pavilion.png`, `evening-fire-circle.png`, `cacao-sound-healing.png`, and related villa assets.
 
-- `hero-pool-pavilion.png`
-- `evening-fire-circle.png`
-- `cacao-sound-healing.png`
-- `revitalization-session.png`
-- `barrel-sauna.png`
-- `jungle-hot-tub.png`
-- `yoga-platform.png`
-- `experience-collage.png`
-- `editorial-statue.png`
-- `accommodation-suite.png`
-- `accommodation-bedroom.png`
-- `accommodation-bath.png`
-- `jungle-lounge.png`
-
-Placeholder slots for future photos (beach, zipline, food, contribution, group connection, leader portraits) are defined in `data/images.ts`.
+Placeholder slots for future photos (beach, zipline, food, contribution, group connection, additional leader portraits) are defined in `data/images.ts`.
 
 ## Pre-launch checklist
 

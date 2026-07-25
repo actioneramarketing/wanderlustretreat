@@ -14,6 +14,8 @@ export type Leader = {
   bio: string;
   /** Portrait path when available; null uses initials placeholder */
   image: string | null;
+  /** CSS object-position for portrait framing */
+  objectPosition?: string;
 };
 
 export type Host = {
@@ -22,6 +24,7 @@ export type Host = {
   role: string;
   bio: string;
   image: string | null;
+  objectPosition?: string;
 };
 
 export const leadersIntro = {
@@ -39,7 +42,8 @@ export const leaders: Leader[] = [
     initials: "KB",
     // DEV: Replace placeholder biography before launch.
     bio: "Kristen’s complete biography and retreat focus will be added as the leadership experience is finalized.",
-    image: null,
+    image: "/images/leaders/kristen-becher.jpg",
+    objectPosition: "center 18%",
   },
   {
     id: "leader-2",

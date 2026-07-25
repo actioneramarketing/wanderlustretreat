@@ -2,12 +2,14 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { navigation, primaryCta } from "@/data/navigation";
-import { siteConfig } from "@/data/retreat";
 import { cn } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+
+const logoSrc = "/images/branding/wanderlust-revival-logo.png";
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -39,16 +41,21 @@ export function Navigation() {
           : "bg-transparent",
       )}
     >
-      <div className="container-wide flex items-center justify-between gap-4 py-4">
+      <div className="container-wide flex items-center justify-between gap-3 py-3 sm:gap-4 sm:py-3.5">
         <Link
           href="/"
-          className="font-serif text-lg tracking-wide text-cream sm:text-xl"
+          className="relative shrink-0 rounded-sm bg-black/55 px-2 py-1.5 shadow-[0_6px_24px_rgba(0,0,0,0.35)] ring-1 ring-white/10 sm:px-2.5 sm:py-2"
           onClick={close}
         >
-          <span className="block leading-none">{siteConfig.shortName}</span>
-          <span className="mt-0.5 block text-[0.65rem] tracking-[0.22em] text-cream/65 uppercase">
-            Retreat
-          </span>
+          <Image
+            src={logoSrc}
+            alt="The Wanderlust Revival Retreat"
+            width={1024}
+            height={375}
+            priority
+            className="h-auto w-[168px] sm:w-[200px] lg:w-[260px]"
+            sizes="(max-width: 640px) 168px, (max-width: 1024px) 200px, 260px"
+          />
         </Link>
 
         <nav
@@ -69,7 +76,7 @@ export function Navigation() {
           </ButtonLink>
         </nav>
 
-        <div className="flex items-center gap-3 lg:hidden">
+        <div className="flex items-center gap-2.5 sm:gap-3 lg:hidden">
           <ButtonLink
             href={primaryCta.href}
             className="!px-3.5 !py-2 text-[0.7rem]"
