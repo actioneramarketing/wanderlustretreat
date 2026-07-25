@@ -29,12 +29,14 @@ export function Leaders() {
                     status={leader.status}
                   />
                 </div>
-                <p className="eyebrow mb-2 text-coral">
+                <p className="eyebrow mb-3 text-coral">
                   {leader.status === "confirmed" ? "Confirmed" : "Coming soon"}
                 </p>
-                <h3 className="font-serif text-2xl text-ink">{leader.name}</h3>
-                <p className="mt-1 text-sm text-muted">{leader.role}</p>
-                <p className="mt-4 flex-1 text-base leading-relaxed text-ink-soft">
+                <h3 className="font-serif text-[1.65rem] leading-tight text-ink sm:text-[1.85rem]">
+                  {leader.name}
+                </h3>
+                <p className="mt-1.5 text-[0.9375rem] text-muted">{leader.role}</p>
+                <p className="mt-4 flex-1 text-base leading-relaxed text-ink-soft sm:text-lg">
                   {leader.bio}
                 </p>
               </article>

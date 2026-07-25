@@ -13,7 +13,7 @@ export function Opening() {
             eyebrow={openingSection.eyebrow}
             heading={openingSection.heading}
           />
-          <div className="mt-8 space-y-5 text-lg leading-relaxed text-ink-soft">
+          <div className="prose-readable mt-8 space-y-5 text-lg leading-relaxed text-ink-soft sm:text-xl">
             {openingSection.paragraphs.map((paragraph) => (
               <p key={paragraph.slice(0, 32)}>{paragraph}</p>
             ))}

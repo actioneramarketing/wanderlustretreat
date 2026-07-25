@@ -12,7 +12,7 @@ export const openingSection = {
 
 export const fourDimensionsIntro = {
   eyebrow: "THE HEART OF THE EXPERIENCE",
-  heading: "Four Parts of Your Life.\nOne Integrated Revival.",
+  heading: "Four Dimensions of Your Life.\nOne Integrated Revival.",
 };
 
 export const villaSection = {

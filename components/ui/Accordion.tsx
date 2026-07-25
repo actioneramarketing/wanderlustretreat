@@ -35,10 +35,10 @@ export function Accordion({ items }: AccordionProps) {
                 type="button"
                 aria-expanded={isOpen}
                 aria-controls={panelId}
-                className="flex w-full items-center justify-between gap-4 py-5 text-left transition-colors hover:text-cacao"
+                className="flex w-full items-center justify-between gap-4 py-6 text-left transition-colors hover:text-cacao"
                 onClick={() => setOpenId(isOpen ? null : item.id)}
               >
-                <span className="min-w-0 font-serif text-xl font-medium text-ink sm:text-2xl">
+                <span className="min-w-0 font-serif text-[1.35rem] font-medium leading-snug text-ink sm:text-[1.65rem]">
                   {item.question}
                 </span>
                 <ChevronDown
@@ -62,7 +62,7 @@ export function Accordion({ items }: AccordionProps) {
                   transition={{ duration: 0.28, ease: "easeOut" }}
                   className="overflow-hidden"
                 >
-                  <p className="max-w-3xl pb-6 text-base leading-relaxed text-ink-soft sm:text-lg">
+                  <p className="prose-readable max-w-3xl pb-7 text-lg leading-relaxed text-ink-soft">
                     {item.answer}
                   </p>
                 </motion.div>

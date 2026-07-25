@@ -59,7 +59,7 @@ export function Villa() {
             {villaSection.features.map((feature) => (
               <li
                 key={feature}
-                className="border-b border-coral/40 pb-1 text-sm tracking-[0.08em] text-cacao uppercase"
+                className="meta-label border-b border-coral/40 pb-1 text-cacao"
               >
                 {feature}
               </li>

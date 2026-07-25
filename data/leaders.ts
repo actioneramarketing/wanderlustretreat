@@ -24,6 +24,7 @@ export type Host = {
   role: string;
   bio: string;
   image: string | null;
+  imageAlt?: string;
   objectPosition?: string;
 };
 
@@ -80,5 +81,7 @@ export const host: Host = {
   role: "Retreat Host · Creator of Villa Wanderlust",
   // DEV: Replace placeholder biography before launch.
   bio: "Jai created Villa Wanderlust as a place where people can step away from familiar patterns, reconnect with nature, gather in meaningful community, and create experiences that stay with them long after they return home. Her complete story and role in the retreat will be added as the experience is finalized.",
-  image: null,
+  image: "/images/leaders/jai.jpg",
+  imageAlt: "Jai, host of The Wanderlust Revival Retreat at Villa Wanderlust",
+  objectPosition: "center 20%",
 };

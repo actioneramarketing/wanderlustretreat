@@ -25,45 +25,35 @@ export function Navigation() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-white shadow-[0_1px_0_rgba(20,40,32,0.04)]">
-      <div className="container-wide relative flex min-h-[72px] items-center justify-between gap-4 py-3 sm:min-h-[84px] sm:py-3.5 lg:min-h-[96px]">
-        <Link
-          href="/"
-          className="relative z-10 shrink-0"
-          onClick={close}
-        >
+      <div className="container-wide flex min-h-[72px] items-center justify-between gap-6 py-3 sm:min-h-[84px] sm:py-3.5 lg:min-h-[96px]">
+        <Link href="/" className="shrink-0" onClick={close}>
           <Image
             src={logoSrc}
             alt="The Wanderlust Revival Retreat"
             width={1024}
             height={375}
             priority
-            className="h-auto w-[168px] sm:w-[210px] xl:w-[255px]"
-            sizes="(max-width: 640px) 168px, (max-width: 1280px) 210px, 255px"
+            className="h-auto w-[168px] sm:w-[210px] lg:w-[240px]"
+            sizes="(max-width: 640px) 168px, (max-width: 1024px) 210px, 240px"
           />
         </Link>
 
         <nav
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-5 xl:flex 2xl:gap-7"
+          className="ml-auto hidden items-center gap-6 lg:flex xl:gap-8"
           aria-label="Primary"
         >
           {navigation.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-[0.8125rem] font-medium tracking-[0.14em] text-jungle uppercase transition-colors hover:text-coral focus-visible:text-coral"
+              className="text-[0.875rem] font-semibold tracking-[0.12em] text-jungle uppercase transition-colors hover:text-coral focus-visible:text-coral"
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        <div className="relative z-10 hidden xl:block">
-          <ButtonLink href={primaryCta.href} className="!px-5 !py-2.5 text-xs">
-            {primaryCta.label}
-          </ButtonLink>
-        </div>
-
-        <div className="relative z-10 flex items-center xl:hidden">
+        <div className="flex items-center lg:hidden">
           <button
             type="button"
             className="inline-flex size-11 items-center justify-center rounded-full border border-jungle/20 text-jungle transition-colors hover:border-coral/50 hover:text-coral"
@@ -81,7 +71,7 @@ export function Navigation() {
         {open ? (
           <motion.div
             id="mobile-menu"
-            className="border-t border-[var(--line)] bg-white xl:hidden"
+            className="border-t border-[var(--line)] bg-white lg:hidden"
             initial={reduceMotion ? false : { height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={reduceMotion ? undefined : { height: 0, opacity: 0 }}

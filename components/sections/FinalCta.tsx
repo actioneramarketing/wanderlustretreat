@@ -26,7 +26,7 @@ export function FinalCta() {
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-cream/80">
             {finalCtaSection.copy}
           </p>
-          <div className="mt-8 space-y-2 text-sm tracking-[0.16em] text-cream/70 uppercase">
+          <div className="meta-label mt-8 space-y-2 text-cream/75">
             <p>{retreatDates.display}</p>
             <p>{retreatLocation.footerLine}</p>
           </div>

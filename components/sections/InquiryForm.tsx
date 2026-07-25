@@ -143,9 +143,9 @@ export function InquiryForm() {
           <form
             onSubmit={onSubmit}
             noValidate
-            className="relative rounded-sm border border-[var(--line)] bg-cream p-6 sm:p-10"
+            className="relative rounded-sm border border-[var(--line)] bg-cream p-6 sm:p-10 lg:p-12"
           >
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="grid gap-7 sm:grid-cols-2">
               <Field
                 id="firstName"
                 label="First name"
@@ -214,7 +214,7 @@ export function InquiryForm() {
               />
             </div>
 
-            <div className="mt-6 space-y-6">
+            <div className="mt-7 space-y-7">
               <TextAreaField
                 id="drawing"
                 label="What is drawing you to The Wanderlust Revival Retreat?"
@@ -227,7 +227,7 @@ export function InquiryForm() {
               <div>
                 <label
                   htmlFor="revivalArea"
-                  className="mb-2 block text-sm font-medium text-ink"
+                  className="mb-2.5 block text-[0.9375rem] font-semibold text-ink"
                 >
                   Which area feels most ready for revival?{" "}
                   <span className="text-coral">*</span>
@@ -252,7 +252,7 @@ export function InquiryForm() {
                   ))}
                 </select>
                 {errors.revivalArea ? (
-                  <p id="revivalArea-error" className="mt-2 text-sm text-coral" role="alert">
+                  <p id="revivalArea-error" className="mt-2 text-[0.9375rem] text-coral" role="alert">
                     {errors.revivalArea}
                   </p>
                 ) : null}
@@ -330,7 +330,7 @@ export function InquiryForm() {
               >
                 {submitting ? "Sending…" : "Request Your Invitation"}
               </button>
-              <p className="mt-4 text-sm text-muted">
+              <p className="mt-4 text-[0.9375rem] text-muted">
                 Submitting an inquiry does not obligate you to enroll.
               </p>
             </div>
@@ -343,7 +343,7 @@ export function InquiryForm() {
 
 function inputClass(hasError: boolean) {
   return cn(
-    "w-full rounded-sm border bg-cream-dark/40 px-4 py-3 text-base text-ink outline-none transition-colors focus:border-teal focus:bg-cream",
+    "min-h-[3rem] w-full rounded-sm border bg-cream-dark/40 px-4 py-3.5 text-base text-ink outline-none transition-colors focus:border-teal focus:bg-cream",
     hasError ? "border-coral" : "border-[var(--line)]",
   );
 }
@@ -371,7 +371,7 @@ function Field({
 }) {
   return (
     <div className={className}>
-      <label htmlFor={id} className="mb-2 block text-sm font-medium text-ink">
+      <label htmlFor={id} className="mb-2.5 block text-[0.9375rem] font-semibold text-ink">
         {label} {required ? <span className="text-coral">*</span> : null}
       </label>
       <input
@@ -387,7 +387,7 @@ function Field({
         required={required}
       />
       {error ? (
-        <p id={`${id}-error`} className="mt-2 text-sm text-coral" role="alert">
+        <p id={`${id}-error`} className="mt-2 text-[0.9375rem] text-coral" role="alert">
           {error}
         </p>
       ) : null}
@@ -412,22 +412,22 @@ function TextAreaField({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-sm font-medium text-ink">
+      <label htmlFor={id} className="mb-2.5 block text-[0.9375rem] font-semibold text-ink">
         {label} {required ? <span className="text-coral">*</span> : null}
       </label>
       <textarea
         id={id}
         name={id}
-        rows={5}
+        rows={6}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
-        className={cn(inputClass(Boolean(error)), "resize-y")}
+        className={cn(inputClass(Boolean(error)), "min-h-[9rem] resize-y")}
         required={required}
       />
       {error ? (
-        <p id={`${id}-error`} className="mt-2 text-sm text-coral" role="alert">
+        <p id={`${id}-error`} className="mt-2 text-[0.9375rem] text-coral" role="alert">
           {error}
         </p>
       ) : null}

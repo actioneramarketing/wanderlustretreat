@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 type ImagePlaceholderProps = {
-  label: string;
+  label?: string;
   className?: string;
   aspect?: "video" | "square" | "portrait" | "wide";
 };
@@ -13,6 +13,7 @@ const aspectClasses = {
   wide: "aspect-[21/9]",
 };
 
+/** Quiet editorial placeholder for photography still to be added. */
 export function ImagePlaceholder({
   label,
   className,
@@ -21,26 +22,20 @@ export function ImagePlaceholder({
   return (
     <div
       className={cn(
-        "relative flex items-end overflow-hidden rounded-sm border border-[var(--line)] bg-gradient-to-br from-forest/90 via-jungle to-jungle-deep p-6 sm:p-8",
+        "relative overflow-hidden rounded-sm border border-[var(--line)] bg-gradient-to-br from-forest/90 via-jungle to-jungle-deep",
         aspectClasses[aspect],
         className,
       )}
       role="img"
-      aria-label={label}
+      aria-label={label || "Retreat photography placeholder"}
     >
       <div
-        className="pointer-events-none absolute inset-0 opacity-30"
+        className="pointer-events-none absolute inset-0 opacity-35"
         style={{
           backgroundImage:
             "radial-gradient(circle at 20% 20%, rgba(184,160,106,0.35), transparent 40%), radial-gradient(circle at 80% 70%, rgba(74,124,122,0.35), transparent 45%)",
         }}
       />
-      <div className="relative">
-        <p className="eyebrow mb-2 text-gold/80">Photo forthcoming</p>
-        <p className="max-w-xs font-serif text-2xl leading-snug text-cream">
-          {label}
-        </p>
-      </div>
     </div>
   );
 }

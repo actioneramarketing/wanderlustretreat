@@ -58,7 +58,7 @@ export function Hero() {
           <p className="mt-6 max-w-xl text-base leading-relaxed text-cream/90 sm:text-lg">
             {heroSection.supporting}
           </p>
-          <p className="mt-5 text-sm tracking-[0.14em] text-cream/75 uppercase">
+          <p className="meta-label mt-5 text-cream/75">
             {retreatLocation.shortLine}
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -71,7 +71,7 @@ export function Hero() {
 
         <a
           href="#opening"
-          className="mt-12 inline-flex items-center gap-2 text-xs tracking-[0.2em] text-cream/70 uppercase transition-colors hover:text-cream"
+          className="meta-label mt-12 inline-flex items-center gap-2 text-cream/75 transition-colors hover:text-cream"
         >
           Scroll
           <ChevronDown className="size-4 animate-bounce" aria-hidden="true" />

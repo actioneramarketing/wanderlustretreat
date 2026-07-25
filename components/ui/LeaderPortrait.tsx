@@ -5,18 +5,20 @@ type LeaderPortraitProps = {
   name: string;
   initials: string;
   image?: string | null;
+  alt?: string;
   objectPosition?: string;
   status?: "confirmed" | "tba" | "host";
   className?: string;
 };
 
 /**
- * Shared 4:5 editorial portrait frame for leaders and host placeholders.
+ * Shared 4:5 editorial portrait frame for leaders and host.
  */
 export function LeaderPortrait({
   name,
   initials,
   image,
+  alt,
   objectPosition = "center 18%",
   status = "tba",
   className,
@@ -41,9 +43,9 @@ export function LeaderPortrait({
       {image ? (
         <Image
           src={image}
-          alt={name}
+          alt={alt || name}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 45vw, 22vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 45vw, 280px"
           className="object-cover"
           style={{ objectPosition }}
         />

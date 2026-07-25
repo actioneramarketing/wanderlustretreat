@@ -12,26 +12,26 @@ export function Footer() {
 
   return (
     <footer className="bg-jungle-deep text-cream">
-      <div className="container-wide section-pad !pb-10 !pt-16">
+      <div className="container-wide section-pad !pb-12 !pt-16">
         <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            <p className="font-serif text-3xl leading-tight">
+            <p className="font-serif text-[clamp(1.85rem,3vw,2.5rem)] leading-tight">
               {siteConfig.name}
             </p>
-            <p className="mt-3 text-cream/70">{retreatLocation.footerLine}</p>
+            <p className="mt-3 text-lg text-cream/75">{retreatLocation.footerLine}</p>
             <div className="mt-8">
               <ButtonLink href={primaryCta.href}>{primaryCta.label}</ButtonLink>
             </div>
           </div>
 
           <div>
-            <p className="eyebrow mb-4 text-gold">Explore</p>
-            <ul className="space-y-3">
+            <p className="eyebrow mb-5 text-gold">Explore</p>
+            <ul className="space-y-3.5">
               {navigation.map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="text-cream/75 transition-colors hover:text-cream"
+                    className="text-base text-cream/80 transition-colors hover:text-cream"
                   >
                     {item.label}
                   </a>
@@ -41,12 +41,12 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="eyebrow mb-4 text-gold">Information</p>
-            <ul className="space-y-3">
+            <p className="eyebrow mb-5 text-gold">Information</p>
+            <ul className="space-y-3.5">
               <li>
                 <a
                   href={primaryCta.href}
-                  className="text-cream/75 transition-colors hover:text-cream"
+                  className="text-base text-cream/80 transition-colors hover:text-cream"
                 >
                   {primaryCta.label}
                 </a>
@@ -54,7 +54,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/privacy"
-                  className="text-cream/75 transition-colors hover:text-cream"
+                  className="text-base text-cream/80 transition-colors hover:text-cream"
                 >
                   Privacy
                 </Link>
@@ -65,8 +65,8 @@ export function Footer() {
 
         <div className="organic-line my-10 opacity-40" />
 
-        <div className="flex flex-col gap-4 text-sm text-cream/55 sm:flex-row sm:items-end sm:justify-between">
-          <p className="max-w-2xl leading-relaxed">{disclaimer}</p>
+        <div className="flex flex-col gap-4 text-[0.9375rem] leading-relaxed text-cream/60 sm:flex-row sm:items-end sm:justify-between">
+          <p className="max-w-2xl">{disclaimer}</p>
           <p className="shrink-0">© {year}</p>
         </div>
       </div>

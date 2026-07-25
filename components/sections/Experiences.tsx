@@ -26,10 +26,10 @@ export function Experiences() {
                 <div className="absolute inset-0 flex items-end p-6 sm:p-10 lg:p-14">
                   <div className="max-w-xl">
                     <p className="eyebrow mb-3 text-gold">{experience.label}</p>
-                    <h3 className="font-serif text-3xl text-cream sm:text-4xl lg:text-5xl">
+                    <h3 className="font-serif text-[clamp(1.85rem,3.5vw,2.75rem)] leading-tight text-cream">
                       {experience.title}
                     </h3>
-                    <p className="mt-4 text-base leading-relaxed text-cream/85 sm:text-lg">
+                    <p className="mt-4 max-w-xl text-lg leading-relaxed text-cream/90">
                       {experience.copy}
                     </p>
                   </div>
@@ -39,10 +39,10 @@ export function Experiences() {
               <article>
                 <div className="mb-8 max-w-2xl">
                   <p className="eyebrow mb-3">{experience.label}</p>
-                  <h3 className="font-serif text-3xl text-ink sm:text-4xl lg:text-5xl">
+                  <h3 className="font-serif text-[clamp(1.85rem,3.5vw,2.75rem)] leading-tight text-ink">
                     {experience.title}
                   </h3>
-                  <p className="mt-5 text-lg leading-relaxed text-ink-soft">
+                  <p className="prose-readable mt-5 text-lg leading-relaxed text-ink-soft">
                     {experience.copy}
                   </p>
                 </div>
@@ -79,10 +79,10 @@ export function Experiences() {
               <article className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
                 <div className={cn(index % 2 === 1 && "lg:order-2")}>
                   <p className="eyebrow mb-3">{experience.label}</p>
-                  <h3 className="font-serif text-3xl text-ink sm:text-4xl">
+                  <h3 className="font-serif text-[clamp(1.85rem,3.5vw,2.5rem)] leading-tight text-ink">
                     {experience.title}
                   </h3>
-                  <p className="mt-5 text-lg leading-relaxed text-ink-soft">
+                  <p className="prose-readable mt-5 text-lg leading-relaxed text-ink-soft">
                     {experience.copy}
                   </p>
                 </div>
@@ -101,10 +101,10 @@ export function Experiences() {
               >
                 <div>
                   <p className="eyebrow mb-3">{experience.label}</p>
-                  <h3 className="font-serif text-3xl text-ink sm:text-4xl">
+                  <h3 className="font-serif text-[clamp(1.85rem,3.5vw,2.5rem)] leading-tight text-ink">
                     {experience.title}
                   </h3>
-                  <p className="mt-5 text-lg leading-relaxed text-ink-soft">
+                  <p className="prose-readable mt-5 text-lg leading-relaxed text-ink-soft">
                     {experience.copy}
                   </p>
                 </div>
