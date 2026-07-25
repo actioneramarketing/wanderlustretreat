@@ -170,20 +170,14 @@ body {
 }
 
 .image-scrim-hero {
-  background:
-    linear-gradient(
-      to right,
-      rgba(13, 26, 21, 0.78) 0%,
-      rgba(13, 26, 21, 0.52) 34%,
-      rgba(13, 26, 21, 0.22) 58%,
-      rgba(13, 26, 21, 0.1) 100%
-    ),
-    linear-gradient(
-      to top,
-      rgba(13, 26, 21, 0.5) 0%,
-      rgba(13, 26, 21, 0.18) 38%,
-      transparent 68%
-    );
+  /* Left-to-right overlay only — keep the right side bright daytime photography */
+  background: linear-gradient(
+    90deg,
+    rgba(8, 35, 27, 0.76) 0%,
+    rgba(8, 35, 27, 0.48) 36%,
+    rgba(8, 35, 27, 0.12) 62%,
+    rgba(8, 35, 27, 0) 82%
+  );
 }
 
 .organic-line {

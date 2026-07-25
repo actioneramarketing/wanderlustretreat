@@ -5,8 +5,9 @@
 
 export const images = {
   hero: {
-    src: "/images/retreat/wanderlust-hero.jpg",
-    alt: "Sunset over the tropical grounds at Villa Wanderlust, with a lounge chair, garden path, and glowing string lights among the jungle foliage",
+    src: "/images/retreat/wanderlust-retreat-hero.jpg",
+    /** Decorative hero background — empty alt avoids duplicate screen-reader content */
+    alt: "",
   },
   poolPavilion: {
     src: "/images/retreat/hero-pool-pavilion.png",

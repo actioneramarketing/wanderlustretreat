@@ -23,8 +23,9 @@ export function Hero() {
         alt={images.hero.alt}
         fill
         priority
+        quality={95}
         sizes="100vw"
-        className="object-cover object-[72%_center]"
+        className="object-cover object-[60%_center] md:object-[55%_center] lg:object-center"
       />
       <div className="image-scrim-hero absolute inset-0" aria-hidden="true" />
 
