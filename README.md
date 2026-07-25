@@ -114,20 +114,11 @@ Most content is centralized so you do not need to hunt through large JSX files:
 | `data/content.ts` | Shared section copy |
 | `data/images.ts` | Image paths, alt text, future photo placeholders |
 
-### Adding the confirmed retreat year
+### Confirmed retreat dates
 
-Open `data/retreat.ts` and update:
+Confirmed retreat dates: **May 30–June 6, 2027**
 
-```ts
-export const retreatDates = {
-  year: 2027, // set when confirmed
-  display: "May 30–June 6, 2027",
-  eyebrow: "MAY 30–JUNE 6, 2027 • COSTA RICA",
-  // ...
-};
-```
-
-Event structured data is intentionally omitted until a full confirmed date (including year) is available.
+Date display strings live in `data/retreat.ts` (`display`, `eyebrow`, `sentence`). Event structured data remains omitted until exact start/end times, address, and other required event fields can be represented accurately.
 
 ### Updating leaders
 
@@ -174,7 +165,7 @@ Placeholder slots for future photos (beach, zipline, food, contribution, group c
 
 Confirm or complete the following before public launch:
 
-- [ ] Confirm retreat year
+- [x] Confirm retreat year — May 30–June 6, 2027
 - [ ] Confirm final pricing structure
 - [ ] Confirm deposit and payment plans
 - [ ] Confirm retreat capacity

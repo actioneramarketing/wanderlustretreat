@@ -14,20 +14,19 @@ export const siteConfig = {
     "Revive your life, health, relationships, and business during an immersive seven-night retreat at Villa Wanderlust in Costa Rica.",
 };
 
-/**
- * Retreat dates — year intentionally omitted until confirmed.
- * When ready, set `year` (e.g. 2027) and update `display` / `eyebrow` accordingly.
- */
+/** Confirmed retreat dates: May 30–June 6, 2027 */
 export const retreatDates = {
-  /** Leave null until the retreat year is confirmed */
-  year: null as number | null,
+  year: 2027,
   startMonth: "May",
   startDay: 30,
   endMonth: "June",
   endDay: 6,
   /** Primary display string used across the site */
-  display: "May 30–June 6",
-  eyebrow: "MAY 30–JUNE 6 • COSTA RICA",
+  display: "May 30–June 6, 2027",
+  /** Uppercase hero / label display */
+  eyebrow: "MAY 30–JUNE 6, 2027 • COSTA RICA",
+  /** Natural sentence form for FAQ and long-form copy */
+  sentence: "May 30 through June 6, 2027",
   nights: 7,
 };
 

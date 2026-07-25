@@ -1,3 +1,5 @@
+import { retreatDates } from "./retreat";
+
 export type FaqItem = {
   id: string;
   question: string;
@@ -8,8 +10,7 @@ export const faqs: FaqItem[] = [
   {
     id: "when",
     question: "When is the retreat?",
-    answer:
-      "May 30 through June 6. The final year and detailed arrival schedule will be confirmed before enrollment.",
+    answer: `The Wanderlust Revival Retreat will take place from ${retreatDates.sentence}. Final arrival times and transportation instructions will be provided during enrollment.`,
   },
   {
     id: "where",
