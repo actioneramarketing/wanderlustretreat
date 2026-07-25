@@ -5,6 +5,10 @@
 
 export const images = {
   hero: {
+    src: "/images/retreat/wanderlust-hero.jpg",
+    alt: "Sunset over the tropical grounds at Villa Wanderlust, with a lounge chair, garden path, and glowing string lights among the jungle foliage",
+  },
+  poolPavilion: {
     src: "/images/retreat/hero-pool-pavilion.png",
     alt: "Turquoise pool and open-air wooden pavilion nestled in the Costa Rican jungle at Villa Wanderlust",
   },

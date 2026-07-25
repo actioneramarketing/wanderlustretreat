@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const gallery = [
   {
-    ...images.hero,
+    ...images.poolPavilion,
     className: "md:col-span-7 md:row-span-2 min-h-[280px] md:min-h-full",
     sizes: "(max-width: 768px) 100vw, 58vw",
   },

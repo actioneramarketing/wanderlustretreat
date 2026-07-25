@@ -6,22 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { navigation, primaryCta } from "@/data/navigation";
-import { cn } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 
 const logoSrc = "/images/branding/wanderlust-revival-logo.png";
 
 export function Navigation() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -33,18 +24,11 @@ export function Navigation() {
   const close = () => setOpen(false);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled || open
-          ? "border-b border-white/10 bg-jungle/90 backdrop-blur-md"
-          : "bg-transparent",
-      )}
-    >
-      <div className="container-wide flex items-center justify-between gap-3 py-3 sm:gap-4 sm:py-3.5">
+    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-white shadow-[0_1px_0_rgba(20,40,32,0.04)]">
+      <div className="container-wide relative flex min-h-[72px] items-center justify-between gap-4 py-3 sm:min-h-[84px] sm:py-3.5 lg:min-h-[96px]">
         <Link
           href="/"
-          className="relative shrink-0 rounded-sm bg-black/55 px-2 py-1.5 shadow-[0_6px_24px_rgba(0,0,0,0.35)] ring-1 ring-white/10 sm:px-2.5 sm:py-2"
+          className="relative z-10 shrink-0"
           onClick={close}
         >
           <Image
@@ -53,40 +37,36 @@ export function Navigation() {
             width={1024}
             height={375}
             priority
-            className="h-auto w-[168px] sm:w-[200px] lg:w-[260px]"
-            sizes="(max-width: 640px) 168px, (max-width: 1024px) 200px, 260px"
+            className="h-auto w-[168px] sm:w-[210px] xl:w-[255px]"
+            sizes="(max-width: 640px) 168px, (max-width: 1280px) 210px, 255px"
           />
         </Link>
 
         <nav
-          className="hidden items-center gap-7 lg:flex"
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-5 xl:flex 2xl:gap-7"
           aria-label="Primary"
         >
           {navigation.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-[0.8rem] tracking-[0.12em] text-cream/80 uppercase transition-colors hover:text-cream"
+              className="text-[0.8125rem] font-medium tracking-[0.14em] text-jungle uppercase transition-colors hover:text-coral focus-visible:text-coral"
             >
               {item.label}
             </a>
           ))}
+        </nav>
+
+        <div className="relative z-10 hidden xl:block">
           <ButtonLink href={primaryCta.href} className="!px-5 !py-2.5 text-xs">
             {primaryCta.label}
           </ButtonLink>
-        </nav>
+        </div>
 
-        <div className="flex items-center gap-2.5 sm:gap-3 lg:hidden">
-          <ButtonLink
-            href={primaryCta.href}
-            className="!px-3.5 !py-2 text-[0.7rem]"
-            onClick={close}
-          >
-            Invitation
-          </ButtonLink>
+        <div className="relative z-10 flex items-center xl:hidden">
           <button
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-full border border-cream/25 text-cream"
+            className="inline-flex size-11 items-center justify-center rounded-full border border-jungle/20 text-jungle transition-colors hover:border-coral/50 hover:text-coral"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -101,7 +81,7 @@ export function Navigation() {
         {open ? (
           <motion.div
             id="mobile-menu"
-            className="border-t border-white/10 bg-jungle lg:hidden"
+            className="border-t border-[var(--line)] bg-white xl:hidden"
             initial={reduceMotion ? false : { height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={reduceMotion ? undefined : { height: 0, opacity: 0 }}
@@ -115,7 +95,7 @@ export function Navigation() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="rounded-md px-2 py-3 font-serif text-2xl text-cream"
+                  className="rounded-md px-2 py-3 font-serif text-2xl text-jungle transition-colors hover:text-coral"
                   onClick={close}
                 >
                   {item.label}

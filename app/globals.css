@@ -23,6 +23,19 @@
   --line-light: rgba(247, 243, 235, 0.18);
   --background: var(--cream);
   --foreground: var(--ink);
+  --site-header-height: 5.5rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --site-header-height: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --site-header-height: 6.25rem;
+  }
 }
 
 @theme inline {
@@ -52,6 +65,11 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Keep sticky header from covering in-page anchors */
+[id] {
+  scroll-margin-top: calc(var(--site-header-height) + 0.75rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -140,16 +158,17 @@ body {
 .image-scrim-hero {
   background:
     linear-gradient(
-      to top,
-      rgba(13, 26, 21, 0.82) 0%,
-      rgba(13, 26, 21, 0.28) 45%,
-      rgba(13, 26, 21, 0.45) 100%
+      to right,
+      rgba(13, 26, 21, 0.78) 0%,
+      rgba(13, 26, 21, 0.52) 34%,
+      rgba(13, 26, 21, 0.22) 58%,
+      rgba(13, 26, 21, 0.1) 100%
     ),
     linear-gradient(
-      to right,
-      rgba(13, 26, 21, 0.55) 0%,
-      rgba(13, 26, 21, 0.15) 55%,
-      transparent 100%
+      to top,
+      rgba(13, 26, 21, 0.5) 0%,
+      rgba(13, 26, 21, 0.18) 38%,
+      transparent 68%
     );
 }
 
