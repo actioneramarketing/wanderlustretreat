@@ -20,13 +20,21 @@ const cormorant = Cormorant_Garamond({
   style: ["normal", "italic"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+const siteTitle = "The Wanderlust Revival Retreat | Costa Rica";
+const siteDescription =
+  "Revive your life, health, relationships, and business during an immersive seven-night retreat at Villa Wanderlust in Costa Rica.";
+const socialShareImage = "/images/retreat/wanderlust-revival-social-share.png";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "The Wanderlust Revival Retreat | Costa Rica",
+    default: siteTitle,
     template: "%s | The Wanderlust Revival Retreat",
   },
-  description: siteConfig.description,
+  description: siteDescription,
   applicationName: siteConfig.name,
   keywords: [
     "Wanderlust Revival Retreat",
@@ -39,24 +47,23 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteConfig.url,
-    siteName: siteConfig.name,
-    title: "The Wanderlust Revival Retreat | Costa Rica",
-    description: siteConfig.description,
+    siteName: "The Wanderlust Revival Retreat",
+    title: siteTitle,
+    description: siteDescription,
     images: [
       {
-        url: "/images/retreat/hero-pool-pavilion.png",
+        url: socialShareImage,
         width: 1200,
-        height: 630,
-        alt: "Villa Wanderlust jungle pool and pavilion in Costa Rica",
+        height: 675,
+        alt: "The Wanderlust Revival Retreat at Villa Wanderlust in Costa Rica",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Wanderlust Revival Retreat | Costa Rica",
-    description: siteConfig.description,
-    images: ["/images/retreat/hero-pool-pavilion.png"],
+    title: siteTitle,
+    description: siteDescription,
+    images: [socialShareImage],
   },
   robots: {
     index: true,
