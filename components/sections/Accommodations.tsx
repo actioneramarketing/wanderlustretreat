@@ -22,29 +22,29 @@ export function Accommodations() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="relative aspect-[4/5] overflow-hidden rounded-sm sm:row-span-2 sm:aspect-auto sm:min-h-[520px]">
                 <Image
+                  src={images.villaBedroom.src}
+                  alt={images.villaBedroom.alt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 40vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
+                <Image
+                  src={images.villaLivingRoom.src}
+                  alt={images.villaLivingRoom.alt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 30vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
+                <Image
                   src={images.accommodationSuite.src}
                   alt={images.accommodationSuite.alt}
                   fill
-                  sizes="(max-width: 640px) 100vw, 40vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
-                <Image
-                  src={images.accommodationBedroom.src}
-                  alt={images.accommodationBedroom.alt}
-                  fill
                   sizes="(max-width: 640px) 100vw, 30vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
-                <Image
-                  src={images.accommodationBath.src}
-                  alt={images.accommodationBath.alt}
-                  fill
-                  sizes="(max-width: 640px) 100vw, 30vw"
-                  className="object-cover"
+                  className="object-cover object-center"
                 />
               </div>
             </div>

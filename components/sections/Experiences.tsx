@@ -53,7 +53,9 @@ export function Experiences() {
                       alt={experience.image.alt}
                       fill
                       sizes="(max-width: 768px) 100vw, 58vw"
+                      quality={90}
                       className="object-cover"
+                      style={{ objectPosition: experience.image.objectPosition }}
                     />
                   </div>
                   <div className="grid gap-4 md:col-span-5">
@@ -67,6 +69,7 @@ export function Experiences() {
                           alt={image.alt}
                           fill
                           sizes="(max-width: 768px) 100vw, 35vw"
+                          quality={90}
                           className="object-cover"
                           style={{ objectPosition: image.objectPosition }}
                         />
@@ -112,8 +115,8 @@ export function Experiences() {
                   <div
                     className={cn(
                       "relative overflow-hidden rounded-sm",
-                      experience.id === "hooponopono"
-                        ? "aspect-[4/5] max-w-md lg:ml-auto"
+                      experience.id === "fire"
+                        ? "aspect-[4/5] max-w-md"
                         : "aspect-[16/11]",
                     )}
                   >
@@ -122,6 +125,7 @@ export function Experiences() {
                       alt={experience.image.alt}
                       fill
                       sizes="(max-width: 1024px) 100vw, 45vw"
+                      quality={90}
                       className="object-cover"
                       style={{ objectPosition: experience.image.objectPosition }}
                     />

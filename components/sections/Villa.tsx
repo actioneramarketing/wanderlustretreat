@@ -6,34 +6,40 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const gallery = [
   {
-    ...images.poolPavilion,
+    ...images.villaPoolDaytime,
     className: "md:col-span-7 md:row-span-2 min-h-[280px] md:min-h-full",
     sizes: "(max-width: 768px) 100vw, 58vw",
+    objectPosition: "center",
   },
   {
-    ...images.yogaPlatform,
+    ...images.villaLivingRoom,
     className: "md:col-span-5 min-h-[220px]",
     sizes: "(max-width: 768px) 100vw, 42vw",
+    objectPosition: "center",
+  },
+  {
+    ...images.villaBedroom,
+    className: "md:col-span-5 min-h-[220px]",
+    sizes: "(max-width: 768px) 100vw, 42vw",
+    objectPosition: "center",
+  },
+  {
+    ...images.poolPavilion,
+    className: "md:col-span-4 min-h-[220px]",
+    sizes: "(max-width: 768px) 100vw, 33vw",
+    objectPosition: "center",
   },
   {
     ...images.hotTub,
-    className: "md:col-span-5 min-h-[220px]",
-    sizes: "(max-width: 768px) 100vw, 42vw",
-  },
-  {
-    ...images.jungleLounge,
     className: "md:col-span-4 min-h-[220px]",
     sizes: "(max-width: 768px) 100vw, 33vw",
+    objectPosition: "center",
   },
   {
     ...images.accommodationSuite,
     className: "md:col-span-4 min-h-[220px]",
     sizes: "(max-width: 768px) 100vw, 33vw",
-  },
-  {
-    ...images.accommodationBedroom,
-    className: "md:col-span-4 min-h-[220px]",
-    sizes: "(max-width: 768px) 100vw, 33vw",
+    objectPosition: "center",
   },
 ];
 
@@ -80,14 +86,15 @@ export function Villa() {
                   fill
                   sizes={item.sizes}
                   className="object-cover transition-transform duration-700 hover:scale-[1.03]"
+                  style={{ objectPosition: item.objectPosition }}
                 />
               </div>
             ))}
           </div>
           <div className="mt-3 relative aspect-[21/8] overflow-hidden rounded-sm sm:aspect-[21/7]">
             <Image
-              src={images.accommodationBath.src}
-              alt={images.accommodationBath.alt}
+              src={images.villaEveningExterior.src}
+              alt={images.villaEveningExterior.alt}
               fill
               sizes="100vw"
               className="object-cover object-center"

@@ -19,9 +19,9 @@ export const revivalDimensions: RevivalDimension[] = [
     title: "Revive Your Life",
     copy: "Reconnect with what excites you, what matters now, and the experiences you want the next chapter of your life to hold. Create space for clarity, possibility, play, purpose, and a renewed sense of aliveness.",
     image: {
-      src: images.jungleLounge.src,
-      alt: images.jungleLounge.alt,
-      objectPosition: "center",
+      src: images.reviveLifeZipline.src,
+      alt: images.reviveLifeZipline.alt,
+      objectPosition: "center top",
     },
   },
   {
@@ -32,7 +32,7 @@ export const revivalDimensions: RevivalDimension[] = [
     image: {
       src: images.sauna.src,
       alt: images.sauna.alt,
-      objectPosition: "center",
+      objectPosition: "center top",
     },
   },
   {
@@ -41,8 +41,8 @@ export const revivalDimensions: RevivalDimension[] = [
     title: "Revive Your Relationships",
     copy: "Experience deeper conversations, meaningful community, shared challenges, honest reflection, laughter, and the kind of connection that is difficult to create inside the pace of everyday life.",
     image: {
-      src: images.eveningFire.src,
-      alt: images.eveningFire.alt,
+      src: images.groupPoolConnection.src,
+      alt: images.groupPoolConnection.alt,
       objectPosition: "center",
     },
   },

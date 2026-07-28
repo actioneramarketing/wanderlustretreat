@@ -14,6 +14,7 @@ export function FinalCta() {
         alt={images.eveningFire.alt}
         fill
         sizes="100vw"
+        quality={90}
         className="object-cover object-center"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-jungle-deep via-jungle-deep/80 to-jungle/55" />

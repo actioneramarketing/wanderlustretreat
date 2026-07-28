@@ -7,10 +7,11 @@ export function ReturnHome() {
   return (
     <section className="relative overflow-hidden py-24 sm:py-28">
       <Image
-        src={images.revitalization.src}
-        alt={images.revitalization.alt}
+        src={images.groupPoolConnection.src}
+        alt={images.groupPoolConnection.alt}
         fill
         sizes="100vw"
+        quality={90}
         className="object-cover object-center"
       />
       <div className="absolute inset-0 bg-jungle-deep/80" />

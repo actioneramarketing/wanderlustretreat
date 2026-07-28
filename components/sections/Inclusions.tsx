@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   exclusions,
   exclusionsIntro,
@@ -5,6 +6,7 @@ import {
   inclusions,
   inclusionsIntro,
 } from "@/data/inclusions";
+import { images } from "@/data/images";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -18,6 +20,31 @@ export function Inclusions() {
             heading={inclusionsIntro.heading}
             className="mb-12"
           />
+        </Reveal>
+
+        <Reveal delay={0.04}>
+          <div className="mb-12 grid gap-4 sm:grid-cols-2">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-sm sm:aspect-[16/11]">
+              <Image
+                src={images.platedMeal.src}
+                alt={images.platedMeal.alt}
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                quality={90}
+                className="object-cover object-center"
+              />
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-sm sm:aspect-[16/11]">
+              <Image
+                src={images.communalDinner.src}
+                alt={images.communalDinner.alt}
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                quality={90}
+                className="object-cover object-[center_20%]"
+              />
+            </div>
+          </div>
         </Reveal>
 
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">

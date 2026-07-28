@@ -23,11 +23,12 @@ export function Opening() {
         <Reveal delay={0.1} className="relative">
           <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
             <Image
-              src={images.jungleLounge.src}
-              alt={images.jungleLounge.alt}
+              src={images.connectionGroupTable.src}
+              alt={images.connectionGroupTable.alt}
               fill
               sizes="(max-width: 1024px) 100vw, 42vw"
-              className="object-cover object-center"
+              quality={90}
+              className="object-cover object-[center_20%]"
             />
           </div>
           <div className="absolute -bottom-6 -left-4 hidden w-40 overflow-hidden rounded-sm border-4 border-cream shadow-xl sm:block lg:-left-8 lg:w-48">

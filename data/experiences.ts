@@ -41,9 +41,9 @@ export const experiences: ExperienceEntry[] = [
     copy: "Enter a playful and meaningful shared challenge centered on communication, collaboration, trust, adaptability, and collective accomplishment. Final experience details will be announced.",
     layout: "left",
     image: {
-      src: images.collage.src,
-      alt: images.collage.alt,
-      objectPosition: "center top",
+      src: images.teamworkCooking.src,
+      alt: images.teamworkCooking.alt,
+      objectPosition: "center 30%",
     },
   },
   {
@@ -73,7 +73,7 @@ export const experiences: ExperienceEntry[] = [
       {
         src: images.sauna.src,
         alt: images.sauna.alt,
-        objectPosition: "center",
+        objectPosition: "center top",
       },
       {
         src: images.hotTub.src,
@@ -91,7 +91,7 @@ export const experiences: ExperienceEntry[] = [
     image: {
       src: images.cacao.src,
       alt: images.cacao.alt,
-      objectPosition: "center",
+      objectPosition: "center 35%",
     },
   },
   {
@@ -101,8 +101,8 @@ export const experiences: ExperienceEntry[] = [
     copy: "Participate in guided practices centered on breath, reflection, forgiveness, personal responsibility, reconnection, and creating room for a new way forward.",
     layout: "right",
     image: {
-      src: images.editorialStatue.src,
-      alt: images.editorialStatue.alt,
+      src: images.revitalization.src,
+      alt: images.revitalization.alt,
       objectPosition: "center",
     },
   },
@@ -111,19 +111,23 @@ export const experiences: ExperienceEntry[] = [
     label: "Jungle Adventure",
     title: "Remember What Aliveness Feels Like",
     copy: "Experience Costa Rica from a new perspective through a jungle or zipline adventure that brings energy, play, courage, and wonder into the week.",
-    layout: "placeholder",
-    placeholderLabel: imagePlaceholders.zipline.label,
+    layout: "left",
+    image: {
+      src: images.jungleWaterfall.src,
+      alt: images.jungleWaterfall.alt,
+      objectPosition: "center",
+    },
   },
   {
     id: "fire",
     label: "Fire and Celebration",
     title: "Gather in the Glow",
     copy: "Come together for an unforgettable evening fire performance, shared celebration, and the kind of conversation that continues long after the formal experience ends.",
-    layout: "wide",
+    layout: "left",
     image: {
-      src: images.eveningFire.src,
-      alt: images.eveningFire.alt,
-      objectPosition: "center",
+      src: images.communalDinner.src,
+      alt: images.communalDinner.alt,
+      objectPosition: "center 25%",
     },
   },
   {
@@ -131,7 +135,11 @@ export const experiences: ExperienceEntry[] = [
     label: "Special Surprise",
     title: "Some Moments Are Better Left Undisclosed",
     copy: "One signature retreat experience will remain a surprise—created to bring wonder, delight, and an unexpected moment of revival into the week.",
-    layout: "placeholder",
-    placeholderLabel: "Surprise experience — details revealed during the retreat",
+    layout: "right",
+    image: {
+      src: images.villaEveningExterior.src,
+      alt: images.villaEveningExterior.alt,
+      objectPosition: "center",
+    },
   },
 ];
