@@ -21,12 +21,16 @@ export function LeaderHero() {
         alt={leaderHero.image.alt}
         fill
         priority
-        quality={90}
+        quality={95}
         sizes="100vw"
-        className="object-cover"
-        style={{ objectPosition: leaderHero.imagePosition }}
+        className="object-cover object-[60%_center] md:object-[55%_center] lg:object-center"
       />
+      {/* Homepage left-to-right scrim, with a slight text-side boost for longer leaders copy */}
       <div className="image-scrim-hero absolute inset-0" aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 w-full max-w-3xl bg-gradient-to-r from-jungle-deep/25 via-jungle-deep/10 to-transparent"
+        aria-hidden="true"
+      />
 
       <div className="container-wide relative z-10 w-full pb-14 pt-16 sm:pb-16 sm:pt-20 lg:pb-20">
         <motion.div

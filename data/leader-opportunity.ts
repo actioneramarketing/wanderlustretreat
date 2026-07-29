@@ -52,8 +52,8 @@ export const leaderHero = {
   supportingSecondary:
     "Lead a meaningful workshop. Build a team of three participants. Have your work professionally filmed. Learn the retreat model from the inside—and earn the opportunity to host a future retreat of your own at Villa Wanderlust.",
   highlight: leaderOpportunity.rewardDisclaimer,
-  image: images.connectionGroupTable,
-  imagePosition: "center 22%",
+  /** Same approved daytime Villa hero asset used on the homepage. */
+  image: images.hero,
 };
 
 export const notJustARole = {
