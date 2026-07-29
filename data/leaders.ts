@@ -30,8 +30,8 @@ export type Host = {
 
 export const leadersIntro = {
   eyebrow: "GUIDED WITH INTENTION",
-  heading: "Four Leaders.\nFour Perspectives.\nOne Transformational Journey.",
-  copy: "The Wanderlust Revival Retreat will be guided by four leaders whose perspectives and experiences will help participants explore revival across life, health, relationships, and business.",
+  heading: "Five Leaders.\nFive Perspectives.\nOne Transformational Journey.",
+  copy: "The Wanderlust Revival Retreat will be guided by five leaders whose perspectives and experiences will help participants explore revival across life, health, relationships, and business. Four additional leader positions are currently open.",
 };
 
 export const leaders: Leader[] = [
@@ -70,6 +70,15 @@ export const leaders: Leader[] = [
     role: "Revival Leader",
     status: "tba",
     initials: "04",
+    bio: "A confirmed leader will be announced as the retreat experience is finalized.",
+    image: null,
+  },
+  {
+    id: "leader-5",
+    name: "Revival Leader To Be Announced",
+    role: "Revival Leader",
+    status: "tba",
+    initials: "05",
     bio: "A confirmed leader will be announced as the retreat experience is finalized.",
     image: null,
   },

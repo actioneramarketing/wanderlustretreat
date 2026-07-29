@@ -1,16 +1,22 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { leaderOpportunity } from "@/data/leader-opportunity";
 import { primaryCta } from "@/data/navigation";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 
 export function MobileStickyCta() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const reduceMotion = useReducedMotion();
+  const isLeadersPage = pathname === "/leaders";
 
   useEffect(() => {
-    const invitation = document.getElementById("invitation");
+    const formAnchor = document.getElementById(
+      isLeadersPage ? "leader-application" : "invitation",
+    );
 
     const update = () => {
       const heroHeight = window.innerHeight * 0.85;
@@ -19,14 +25,14 @@ export function MobileStickyCta() {
         window.scrollY + window.innerHeight >
         document.documentElement.scrollHeight - 520;
 
-      let invitationVisible = false;
-      if (invitation) {
-        const rect = invitation.getBoundingClientRect();
-        invitationVisible =
+      let formVisible = false;
+      if (formAnchor) {
+        const rect = formAnchor.getBoundingClientRect();
+        formVisible =
           rect.top < window.innerHeight - 80 && rect.bottom > 80;
       }
 
-      setVisible(pastHero && !nearFooter && !invitationVisible);
+      setVisible(pastHero && !nearFooter && !formVisible);
     };
 
     update();
@@ -36,7 +42,14 @@ export function MobileStickyCta() {
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
-  }, []);
+  }, [isLeadersPage]);
+
+  const cta = isLeadersPage
+    ? {
+        label: leaderOpportunity.ctas.primary.label,
+        href: leaderOpportunity.ctas.primary.href,
+      }
+    : primaryCta;
 
   return (
     <AnimatePresence>
@@ -49,8 +62,8 @@ export function MobileStickyCta() {
           transition={{ duration: 0.28 }}
         >
           <div className="rounded-2xl border border-white/10 bg-jungle/95 p-3 shadow-2xl shadow-black/30 backdrop-blur-md">
-            <ButtonLink href={primaryCta.href} className="w-full">
-              {primaryCta.label}
+            <ButtonLink href={cta.href} className="w-full">
+              {cta.label}
             </ButtonLink>
           </div>
         </motion.div>

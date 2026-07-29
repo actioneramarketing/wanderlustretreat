@@ -5,7 +5,11 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { navigation, primaryCta } from "@/data/navigation";
+import {
+  mobileOnlyNavigation,
+  navigation,
+  primaryCta,
+} from "@/data/navigation";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 
 const logoSrc = "/images/branding/wanderlust-revival-logo.png";
@@ -43,13 +47,13 @@ export function Navigation() {
           aria-label="Primary"
         >
           {navigation.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               className="text-[0.875rem] font-semibold tracking-[0.12em] text-jungle uppercase transition-colors hover:text-coral focus-visible:text-coral"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -82,14 +86,24 @@ export function Navigation() {
               aria-label="Mobile"
             >
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.href}
                   href={item.href}
                   className="rounded-md px-2 py-3 font-serif text-2xl text-jungle transition-colors hover:text-coral"
                   onClick={close}
                 >
                   {item.label}
-                </a>
+                </Link>
+              ))}
+              {mobileOnlyNavigation.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-md px-2 py-3 font-serif text-2xl text-coral transition-colors hover:text-jungle"
+                  onClick={close}
+                >
+                  {item.label}
+                </Link>
               ))}
               <div className="mt-3 px-2 pb-2">
                 <ButtonLink

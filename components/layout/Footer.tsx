@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { leaderOpportunity } from "@/data/leader-opportunity";
 import { navigation, primaryCta } from "@/data/navigation";
 import {
   disclaimer,
@@ -29,12 +30,12 @@ export function Footer() {
             <ul className="space-y-3.5">
               {navigation.map((item) => (
                 <li key={item.href}>
-                  <a
+                  <Link
                     href={item.href}
                     className="text-base text-cream/80 transition-colors hover:text-cream"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -44,12 +45,20 @@ export function Footer() {
             <p className="eyebrow mb-5 text-gold">Information</p>
             <ul className="space-y-3.5">
               <li>
-                <a
+                <Link
                   href={primaryCta.href}
                   className="text-base text-cream/80 transition-colors hover:text-cream"
                 >
                   {primaryCta.label}
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={leaderOpportunity.href}
+                  className="text-base text-cream/80 transition-colors hover:text-cream"
+                >
+                  {leaderOpportunity.footerLabel}
+                </Link>
               </li>
               <li>
                 <Link
