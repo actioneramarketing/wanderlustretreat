@@ -34,6 +34,18 @@ export const leaderOpportunity = {
       label: "Explore the Leader Opportunity",
       href: "#opportunity",
     },
+    securePosition: {
+      label: "Secure My Leader Position",
+      href: "#leader-application",
+    },
+    applyWithParticipant: {
+      label: "Apply With My First Participant",
+      href: "#leader-application",
+    },
+    explorePath: {
+      label: "Explore Your Leader Path",
+      href: "#leader-commitment",
+    },
     returnHome: {
       label: "Return to the Retreat Page",
       href: "/",
@@ -43,6 +55,45 @@ export const leaderOpportunity = {
   footerLabel: "Leader Opportunity",
   href: "/leaders",
 } as const;
+
+/** Centralized leader financial commitment model — edit numbers here only. */
+export const leaderFinancials = {
+  baseRetreatCost: 7500,
+  depositAmount: 2500,
+  creditPerParticipant: 2500,
+  teamGoal: 3,
+  villaWeekValueAmount: 13000,
+  fullPayParticipantPrice: 7500,
+} as const;
+
+export function formatLeaderCurrency(amount: number): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
+export function getLeadershipMilestone(participants: number) {
+  const count = Math.max(0, Math.min(participants, leaderFinancials.teamGoal));
+  const credits = count * leaderFinancials.creditPerParticipant;
+  const leaderCost = Math.max(0, leaderFinancials.baseRetreatCost - credits);
+  const depositAppliedRemaining = Math.max(
+    0,
+    leaderCost - leaderFinancials.depositAmount,
+  );
+
+  return {
+    participants: count,
+    credits,
+    leaderCost,
+    depositAppliedRemaining,
+    fullyCovered: leaderCost === 0,
+    qualifiesForVillaWeek: count >= leaderFinancials.teamGoal,
+  };
+}
+
+export const leadershipMilestones = [1, 2, 3].map(getLeadershipMilestone);
 
 export const leaderHero = {
   eyebrow: "FOUR LEADER POSITIONS AVAILABLE",
@@ -106,6 +157,120 @@ export const teamModel = {
   },
   closing:
     "With five leaders and their teams, the retreat becomes a connected community of smaller groups within the larger shared experience.",
+};
+
+export const leaderCommitment = {
+  eyebrow: "YOUR LEADER COMMITMENT",
+  heading: "Two Ways to Secure Your Leader Position",
+  opening: [
+    "A leader position represents more than a complimentary place at the retreat.",
+    "Villa accommodations must be reserved. Teams must be formed. Workshops must be planned. The other leaders and participants need to know that every person on the leadership team is fully committed to making the experience successful.",
+    "For that reason, every approved Retreat Leader secures their position through one of two commitment paths.",
+  ],
+  sharedOutcome: `Both paths lead to the same opportunity: Build a team of three fully enrolled participants, earn ${formatLeaderCurrency(leaderFinancials.baseRetreatCost)} in leadership credits, have your own retreat participation fully covered, and qualify for the future Villa Wanderlust week valued at nearly ${formatLeaderCurrency(leaderFinancials.villaWeekValueAmount)}.`,
+  creditModel: {
+    heading: `Every Person You Enroll Reduces Your Retreat Cost by ${formatLeaderCurrency(leaderFinancials.creditPerParticipant)}`,
+    baseLabel: "Leader Retreat Participation",
+    baseAmount: formatLeaderCurrency(leaderFinancials.baseRetreatCost),
+    villaUnlockNote: `Three enrolled participants also qualify you for the future Villa Wanderlust week, valued at nearly ${formatLeaderCurrency(leaderFinancials.villaWeekValueAmount)}, subject to the final leader and property-use agreements.`,
+  },
+  pathOne: {
+    label: "Path One",
+    heading: `Secure Your Position With a ${formatLeaderCurrency(leaderFinancials.depositAmount)} Leader Deposit`,
+    copy: [
+      `Once you are approved as a strong match for the leadership team, you may immediately secure your position with a ${formatLeaderCurrency(leaderFinancials.depositAmount)} deposit.`,
+      `The deposit is applied toward your ${formatLeaderCurrency(leaderFinancials.baseRetreatCost)} retreat participation. It is not an additional fee.`,
+      `As members of your team enroll, you earn ${formatLeaderCurrency(leaderFinancials.creditPerParticipant)} in leadership credit for each fully enrolled participant.`,
+    ],
+    idealFor:
+      "This path is ideal for a leader who is ready to reserve their position immediately and begin building their team.",
+    ctaLabel: leaderOpportunity.ctas.securePosition.label,
+    ctaHref: leaderOpportunity.ctas.securePosition.href,
+    summaryStart: `${formatLeaderCurrency(leaderFinancials.depositAmount)} leader deposit`,
+    summaryBestFor:
+      "A leader ready to lock in their place before enrolling their first participant",
+    summaryDeposit:
+      "Applied toward the leader’s retreat cost and returned after three qualifying enrollments, subject to the leader agreement",
+  },
+  pathTwo: {
+    label: "Path Two",
+    heading:
+      "Enroll One Full-Pay Participant and Waive the Upfront Deposit",
+    copy: [
+      `An approved leader may also secure their position by immediately enrolling one participant at the full retreat price of ${formatLeaderCurrency(leaderFinancials.fullPayParticipantPrice)}.`,
+      `That first participant earns the leader their first ${formatLeaderCurrency(leaderFinancials.creditPerParticipant)} leadership credit and waives the requirement to provide the ${formatLeaderCurrency(leaderFinancials.depositAmount)} upfront deposit.`,
+      "The leader is still responsible for completing the three-person team goal.",
+    ],
+    idealFor:
+      "This path is ideal for a leader who already has an aligned client, community member, or participant ready to enroll.",
+    ctaLabel: leaderOpportunity.ctas.applyWithParticipant.label,
+    ctaHref: leaderOpportunity.ctas.applyWithParticipant.href,
+    summaryStart: "One full-pay participant enrolled immediately",
+    summaryBestFor:
+      "A leader who already has someone ready to join their team",
+    summaryDeposit: `The upfront ${formatLeaderCurrency(leaderFinancials.depositAmount)} deposit is waived`,
+  },
+  bothPaths: {
+    require: `Three fully enrolled participants to completely cover the leader’s ${formatLeaderCurrency(leaderFinancials.baseRetreatCost)} retreat participation`,
+    unlock: `The future Villa Wanderlust week valued at nearly ${formatLeaderCurrency(leaderFinancials.villaWeekValueAmount)}`,
+  },
+  whyMatters: {
+    heading: "Why We Require a Real Commitment",
+    copy: [
+      "The success of this retreat depends on every leader showing up with intention, preparation, and follow-through.",
+      "A leader position affects Villa accommodations and room planning, the balance of the five-person leadership team, participant recruitment and communication, workshop scheduling, team assignments, retreat logistics, and the overall experience of every guest.",
+      "The commitment structure protects the retreat from reserving a limited leader position for someone who is not yet ready to actively build their team.",
+      `It also creates a fair pathway for every approved leader: Bring three aligned participants, earn your full retreat participation, and unlock a future retreat opportunity whose property value alone is nearly ${formatLeaderCurrency(leaderFinancials.villaWeekValueAmount)}.`,
+    ],
+    highlight:
+      "This is not a fee for the privilege of leading. It is a shared commitment structure that allows serious leaders to earn an extraordinary retreat and future-hosting opportunity.",
+  },
+  valueStack: {
+    heading: "What Becomes Possible When You Reach Three",
+    items: [
+      {
+        label: `Your ${formatLeaderCurrency(leaderFinancials.baseRetreatCost)} Wanderlust retreat participation`,
+        result: "Fully covered",
+      },
+      {
+        label: `Your ${formatLeaderCurrency(leaderFinancials.depositAmount)} deposit`,
+        result: "Returned, when applicable under Path One",
+      },
+      {
+        label: "Your approved workshop",
+        result: "Professionally filmed, subject to the leader agreement",
+      },
+      {
+        label: "Your retreat leadership experience",
+        result: "Built with real participants",
+      },
+      {
+        label: "Your future Villa Wanderlust week",
+        result: `Valued at nearly ${formatLeaderCurrency(leaderFinancials.villaWeekValueAmount)}`,
+      },
+    ],
+    combinedLabel: "Potential combined retreat and property value",
+    combinedAmount: formatLeaderCurrency(
+      leaderFinancials.baseRetreatCost + leaderFinancials.villaWeekValueAmount,
+    ),
+    combinedNote:
+      "Nearly $20,500 in retreat participation and future property value — calculated as $7,500 retreat participation plus the organizer-provided nearly $13,000 Villa week value. This is not cash, earnings, income, compensation, or guaranteed profit.",
+  },
+  enrollmentDefinition: {
+    heading: "What Counts as an Enrolled Participant?",
+    copy: "A participant counts toward a leader’s team goal after completing the required retreat enrollment process, signing the applicable participant agreement, and making the required payment according to their approved payment arrangement.",
+    doesNotCount: [
+      "Verbal interest",
+      "An incomplete application",
+      "A person who has not signed the required agreement",
+      "An unpaid reservation",
+      "A participant whose enrollment is later canceled or refunded, subject to the final leader agreement",
+    ],
+    closing:
+      "Final qualification rules, payment deadlines, cancellations, participant substitutions, and credit timing will be defined in the written leader agreement.",
+  },
+  termsNote:
+    "Payment deadlines, credit timing, participant qualification, cancellations, substitutions, deposit return, and any remaining leader balance will be defined in the written leader agreement before the leader secures their position.",
 };
 
 export const majorReward = {
@@ -441,10 +606,55 @@ export const leaderFaqs = [
       "Each selected leader will be expected to enroll three aligned participants for their team.",
   },
   {
+    id: "financial-commitment",
+    question: "Is there a financial commitment to become a Retreat Leader?",
+    answer: `Yes. Once approved, a leader secures their position either by providing a ${formatLeaderCurrency(leaderFinancials.depositAmount)} deposit that is applied toward their retreat participation or by immediately enrolling one full-pay participant, which waives the upfront deposit.`,
+  },
+  {
+    id: "leadership-credits",
+    question: "How do the $2,500 leadership credits work?",
+    answer: `Each qualifying participant fully enrolled on your team earns you a ${formatLeaderCurrency(leaderFinancials.creditPerParticipant)} credit toward the ${formatLeaderCurrency(leaderFinancials.baseRetreatCost)} cost of your retreat participation. One participant reduces your cost to ${formatLeaderCurrency(getLeadershipMilestone(1).leaderCost)}. Two participants reduce your cost to ${formatLeaderCurrency(getLeadershipMilestone(2).leaderCost)}. Three participants fully cover your retreat participation.`,
+  },
+  {
+    id: "deposit-treatment",
+    question: "What happens to my $2,500 deposit?",
+    answer: `Under the deposit path, the ${formatLeaderCurrency(leaderFinancials.depositAmount)} is applied toward your retreat cost. With one qualifying participant, your total cost becomes ${formatLeaderCurrency(getLeadershipMilestone(1).leaderCost)} and ${formatLeaderCurrency(getLeadershipMilestone(1).depositAppliedRemaining)} remains due. With two qualifying participants, your final cost is ${formatLeaderCurrency(getLeadershipMilestone(2).leaderCost)} and the deposit covers it. With three qualifying participants, your retreat is fully covered and the deposit is returned, subject to the final leader agreement.`,
+  },
+  {
+    id: "path-two-partial",
+    question:
+      "What happens if my first participant waives my deposit but I do not enroll three people?",
+    answer: `Your first participant earns you a ${formatLeaderCurrency(leaderFinancials.creditPerParticipant)} leadership credit, but it does not automatically make your retreat free. If you enroll only one qualifying participant, your final retreat cost is ${formatLeaderCurrency(getLeadershipMilestone(1).leaderCost)}. If you enroll two qualifying participants, your final retreat cost is ${formatLeaderCurrency(getLeadershipMilestone(2).leaderCost)}. If you enroll three, your retreat participation is fully covered.`,
+  },
+  {
+    id: "villa-requires-three",
+    question: "Do I earn the Villa Wanderlust week with fewer than three participants?",
+    answer:
+      "No. The future Villa Wanderlust week is tied to completing the three-person team goal and satisfying the final leader requirements.",
+  },
+  {
+    id: "villa-not-cash",
+    question: "Is the Villa week worth nearly $13,000 paid to me in cash?",
+    answer:
+      "No. The nearly $13,000 figure represents the organizer-provided value of the future property week. It is not a cash payment, commission, wage, refund, or income guarantee.",
+  },
+  {
+    id: "balances-due",
+    question: "When are leader balances due?",
+    answer:
+      "Payment deadlines, credit timing, participant qualification, cancellations, substitutions, and any remaining leader balance will be defined in the written leader agreement before the leader secures their position.",
+  },
+  {
+    id: "enrolled-definition",
+    question: "What counts as an enrolled participant?",
+    answer:
+      "A participant counts toward a leader’s team goal after completing the required retreat enrollment process, signing the applicable participant agreement, and making the required payment according to their approved payment arrangement. Verbal interest, incomplete applications, unpaid reservations, and canceled enrollments do not count, subject to the final leader agreement.",
+  },
+  {
     id: "enroll-three",
     question: "What happens when I enroll three people?",
     answer:
-      "Once you satisfy the final leader requirements and your three participants complete the required enrollment process, you become eligible for a future one-week Villa Wanderlust retreat opportunity, subject to scheduling, availability, and a separate written agreement.",
+      "Once you satisfy the final leader requirements and your three participants complete the required enrollment process, your retreat participation is fully covered and you become eligible for a future one-week Villa Wanderlust retreat opportunity, subject to scheduling, availability, and a separate written agreement.",
   },
   {
     id: "value",
@@ -520,6 +730,18 @@ export const leaderApplication = {
   successMessage:
     "Thank you. Your leader application has been received. The retreat team will review it and contact you regarding fit and next steps.",
   submitLabel: "Submit Leader Application",
+  commitmentPathLabel:
+    "Which leader commitment path are you most prepared to use?",
+  commitmentPathOptions: [
+    `I am prepared to secure my position with the ${formatLeaderCurrency(leaderFinancials.depositAmount)} leader deposit`,
+    "I have a full-pay participant ready to enroll and would like to use the deposit-waiver path",
+    "I would like to discuss both options",
+    "I am interested but not yet prepared to make either commitment",
+  ],
+  firstParticipantLabel:
+    "If you have a potential first participant, tell us briefly who they are and why the retreat may be aligned for them.",
+  firstParticipantHint:
+    "Share a brief note only — do not include sensitive personal information.",
   consentItems: [
     "This is an application, not automatic acceptance",
     "The leader role includes real responsibilities",

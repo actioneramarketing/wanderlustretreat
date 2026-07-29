@@ -55,6 +55,8 @@ function validatePayload(
     leadershipExperience: cleanText(body.leadershipExperience, 4000),
     canEnrollThree: cleanText(body.canEnrollThree, 500),
     potentialParticipants: cleanText(body.potentialParticipants, 3000),
+    commitmentPath: cleanText(body.commitmentPath, 300),
+    firstParticipantNote: cleanText(body.firstParticipantNote, 2000),
     futureRetreatVision: cleanText(body.futureRetreatVision, 4000),
     participantsAsLeaders: cleanText(body.participantsAsLeaders, 3000),
     whyAligned: cleanText(body.whyAligned, 4000),
@@ -78,6 +80,7 @@ function validatePayload(
     !data.workConnection ||
     !data.priorLeadership ||
     !data.canEnrollThree ||
+    !data.commitmentPath ||
     !data.futureRetreatVision ||
     !data.whyAligned
   ) {

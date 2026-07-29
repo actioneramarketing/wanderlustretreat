@@ -3,6 +3,7 @@ import { FiveLeaderTeam } from "@/components/leaders/FiveLeaderTeam";
 import { FuturePathways } from "@/components/leaders/FuturePathways";
 import { LeaderApplicationForm } from "@/components/leaders/LeaderApplicationForm";
 import { LeaderBenefits } from "@/components/leaders/LeaderBenefits";
+import { LeaderCommitment } from "@/components/leaders/LeaderCommitment";
 import { LeaderFaq } from "@/components/leaders/LeaderFaq";
 import { LeaderFinalCta } from "@/components/leaders/LeaderFinalCta";
 import { LeaderHero } from "@/components/leaders/LeaderHero";
@@ -60,6 +61,7 @@ export default function LeadersOpportunityPage() {
       <LeaderHero />
       <NotJustARole />
       <TeamModel />
+      <LeaderCommitment />
       <MajorReward />
       <FuturePathways />
       <WorkshopFilming />

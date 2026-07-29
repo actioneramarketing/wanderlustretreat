@@ -92,6 +92,8 @@ export type LeaderApplicationPayload = {
   leadershipExperience: string;
   canEnrollThree: string;
   potentialParticipants: string;
+  commitmentPath: string;
+  firstParticipantNote: string;
   futureRetreatVision: string;
   participantsAsLeaders: string;
   whyAligned: string;
@@ -155,6 +157,11 @@ export function buildLeaderApplicationEmailHtml(
       ["Approximate audience size", data.audienceSize],
       ["Can enroll three participants", data.canEnrollThree],
       ["Potential participants", data.potentialParticipants || "—"],
+      ["Preferred commitment path", data.commitmentPath],
+      [
+        "Potential first participant note",
+        data.firstParticipantNote || "—",
+      ],
       [
         "Participants as future guests / leaders",
         data.participantsAsLeaders || "—",

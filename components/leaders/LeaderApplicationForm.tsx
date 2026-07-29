@@ -30,6 +30,8 @@ type FormState = {
   leadershipExperience: string;
   canEnrollThree: string;
   potentialParticipants: string;
+  commitmentPath: string;
+  firstParticipantNote: string;
   futureRetreatVision: string;
   participantsAsLeaders: string;
   whyAligned: string;
@@ -60,6 +62,8 @@ const initialState: FormState = {
   leadershipExperience: "",
   canEnrollThree: "",
   potentialParticipants: "",
+  commitmentPath: "",
+  firstParticipantNote: "",
   futureRetreatVision: "",
   participantsAsLeaders: "",
   whyAligned: "",
@@ -111,6 +115,9 @@ function validate(values: FormState): FormErrors {
   if (!values.canEnrollThree.trim()) {
     errors.canEnrollThree =
       "Please share whether you feel confident enrolling three participants.";
+  }
+  if (!values.commitmentPath) {
+    errors.commitmentPath = "Please select a commitment path option.";
   }
   if (!values.futureRetreatVision.trim() || values.futureRetreatVision.trim().length < 20) {
     errors.futureRetreatVision =
@@ -362,6 +369,53 @@ export function LeaderApplicationForm() {
                 error={errors.potentialParticipants}
                 onChange={(value) => update("potentialParticipants", value)}
               />
+              <div>
+                <label
+                  htmlFor="commitmentPath"
+                  className="mb-2.5 block text-[0.9375rem] font-semibold text-ink"
+                >
+                  {leaderApplication.commitmentPathLabel}{" "}
+                  <span className="text-coral">*</span>
+                </label>
+                <select
+                  id="commitmentPath"
+                  name="commitmentPath"
+                  value={values.commitmentPath}
+                  onChange={(event) =>
+                    update("commitmentPath", event.target.value)
+                  }
+                  aria-invalid={Boolean(errors.commitmentPath)}
+                  aria-describedby={
+                    errors.commitmentPath ? "commitmentPath-error" : undefined
+                  }
+                  className={inputClass(Boolean(errors.commitmentPath))}
+                  required
+                >
+                  <option value="">Select an option</option>
+                  {leaderApplication.commitmentPathOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                {errors.commitmentPath ? (
+                  <p
+                    id="commitmentPath-error"
+                    className="mt-2 text-[0.9375rem] text-coral"
+                    role="alert"
+                  >
+                    {errors.commitmentPath}
+                  </p>
+                ) : null}
+              </div>
+              <TextAreaField
+                id="firstParticipantNote"
+                label={leaderApplication.firstParticipantLabel}
+                value={values.firstParticipantNote}
+                error={errors.firstParticipantNote}
+                onChange={(value) => update("firstParticipantNote", value)}
+                hint={leaderApplication.firstParticipantHint}
+              />
               <TextAreaField
                 id="futureRetreatVision"
                 label="What kind of retreat would you like to host at Villa Wanderlust in the future?"
@@ -553,6 +607,7 @@ function TextAreaField({
   onChange,
   error,
   required,
+  hint,
 }: {
   id: string;
   label: string;
@@ -560,6 +615,7 @@ function TextAreaField({
   onChange: (value: string) => void;
   error?: string;
   required?: boolean;
+  hint?: string;
 }) {
   return (
     <div>
@@ -569,6 +625,11 @@ function TextAreaField({
       >
         {label} {required ? <span className="text-coral">*</span> : null}
       </label>
+      {hint ? (
+        <p id={`${id}-hint`} className="mb-2.5 text-sm text-muted">
+          {hint}
+        </p>
+      ) : null}
       <textarea
         id={id}
         name={id}
@@ -576,7 +637,9 @@ function TextAreaField({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         aria-invalid={Boolean(error)}
-        aria-describedby={error ? `${id}-error` : undefined}
+        aria-describedby={
+          error ? `${id}-error` : hint ? `${id}-hint` : undefined
+        }
         className={cn(inputClass(Boolean(error)), "min-h-[8rem] resize-y")}
         required={required}
       />
