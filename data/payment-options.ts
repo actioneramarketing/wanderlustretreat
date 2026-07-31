@@ -111,13 +111,12 @@ export const paymentOptions: PaymentOption[] = [
     amountDisplay: "$8,500",
     title: "Credit Card Pay-in-Full Rate",
     method: "PayPal / credit card",
-    description:
-      "One credit-card payment through the approved PayPal payment method.",
+    description: "One credit-card payment through PayPal.",
     badge: "Credit Card Pay in Full",
     formLabel: "$8,500 credit card paid in full through PayPal",
     instructionsHeading: "Pay in Full by Credit Card Through PayPal",
     instructionsCopy:
-      "Credit-card payments are completed through PayPal using the payment amount confirmed during your enrollment call.",
+      "Please manually send your required retreat payment through PayPal this week using the amount confirmed during your enrollment call.",
     isBank: false,
     isPlan: false,
   },
@@ -134,38 +133,51 @@ export const paymentOptions: PaymentOption[] = [
     formLabel: "$9,000 credit card payment plan through PayPal",
     instructionsHeading: "Credit Card Payment Plan Through PayPal",
     instructionsCopy:
-      "This option allows you to complete your retreat investment through scheduled credit-card payments via PayPal. Payments are not automatically charged, and invoices will not be issued for individual installments.",
+      "Please manually send your required retreat payment through PayPal this week. Future installments must also be submitted manually according to the schedule provided to you.",
     isBank: false,
     isPlan: true,
   },
 ];
 
-export const yourPaymentAmount = {
-  heading: "Your Payment Amount",
-  copy: "The amount and payment schedule associated with your retreat enrollment should have been confirmed during your call with one of the retreat hosts. Enter and send only the amount you were instructed to pay.",
-  uncertain: `If you are uncertain about your payment amount or upcoming due date, do not estimate or submit payment until you have confirmed it. Email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} for assistance.`,
+/** Primary PayPal payment instructions shown after a credit-card option is selected. */
+export const paymentRequiredThisWeek = {
+  heading: "Payment Required This Week",
+  intro: "Please manually send your required retreat payment through PayPal this week.",
+  recipientLabel: "Send your payment to",
+  recipientEmail: paymentPage.paypalRecipientEmail,
+  amountCopy:
+    "Your required payment amount should have been confirmed during your call with one of the retreat hosts. Please send only the amount you were instructed to pay.",
+  uncertainCopy: `If you do not know the correct amount, do not guess or submit a payment until you have confirmed it. Email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} for assistance.`,
+  hostNote:
+    "The retreat host will provide any additional PayPal instructions directly to you.",
+  ctaLabel: "Confirm My Payment Choice",
+  ctaHref: "#payment-request",
 };
 
 export const manualPaymentResponsibility = {
-  heading: "Manual Payment Responsibility",
-  copy: "Payments are not automatically charged, and invoices will not be issued for individual installments. You are responsible for manually submitting each payment by its scheduled due date. The retreat team may send courtesy reminders, but reminders are not guaranteed and do not transfer responsibility away from you. You remain responsible for making every payment in full and on time.",
+  heading: "Important: Payments Are Submitted Manually",
+  copy: [
+    "An invoice or automatic payment request will not be sent. You are responsible for manually submitting this payment by its due date.",
+    "If you selected a payment plan, each future installment must also be manually submitted according to the payment schedule provided to you. The retreat team may send courtesy reminders, but you remain responsible for making every payment in full and on time.",
+  ],
 };
 
-export const paypalPaymentInstructions = {
-  heading: "Paying Through PayPal",
-  recipientLabel: "Send the payment to",
-  recipientEmail: paymentPage.paypalRecipientEmail,
-  copy: [
-    "Enter the payment amount confirmed during your retreat enrollment call. Carefully verify the recipient email and payment amount before submitting the transaction.",
-    `If you do not know the correct amount to send, stop and email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} before completing the payment.`,
+export const beforeSendingChecklist = {
+  heading: "Before Sending Your Payment",
+  intro: "Please confirm that:",
+  items: [
+    "You are sending the payment through PayPal this week.",
+    `The recipient is ${paymentPage.paypalRecipientEmail}.`,
+    "The payment amount matches the amount confirmed during your retreat call.",
+    "You understand that future scheduled payments must also be submitted manually.",
   ],
-  important: [
-    "Use the PayPal payment method approved by the retreat’s payment processor and legal/payment advisor.",
-    "Do not classify a retreat purchase as a personal Friends & Family transfer.",
-    "Verify the recipient email before submitting payment.",
-  ],
-  ctaLabel: "Confirm My Payment Choice",
-  ctaHref: "#payment-request",
+};
+
+/** Bank-option amount guidance (amounts are never calculated on this page). */
+export const bankPaymentAmountNotice = {
+  heading: "Your Payment Amount",
+  copy: "Your required payment amount should have been confirmed during your call with one of the retreat hosts. Please send only the amount you were instructed to pay.",
+  uncertain: `If you do not know the correct amount, do not guess or submit a payment until you have confirmed it. Email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} for assistance.`,
 };
 
 export const achInstructions = {
@@ -223,7 +235,7 @@ export const paymentForm = {
     "I need help choosing an option",
   ],
   paymentAmountConfirmation:
-    "I confirm that I am sending the payment amount provided during my retreat enrollment call and understand that I am responsible for manually submitting all future payments by their scheduled due dates.",
+    "I confirm that I am sending the payment amount provided during my retreat enrollment call and understand that I am responsible for manually submitting all scheduled payments by their respective due dates.",
   acknowledgments: [
     "I understand that submitting this form does not by itself secure my place.",
     "My participation is confirmed only after required payment and retreat agreements are completed.",
@@ -283,7 +295,7 @@ export const paymentComparison = {
     {
       label: "Credit Card Pay in Full",
       amount: "$8,500",
-      detail: "One approved PayPal payment",
+      detail: "One PayPal payment",
     },
     {
       label: "Maximum Flexibility",
@@ -304,29 +316,29 @@ export const paymentFaqs = [
     id: "credit-card",
     question: "Can I pay by credit card?",
     answer:
-      "Yes. Approved participants may pay by credit card through the approved PayPal payment method.",
-  },
-  {
-    id: "paypal-type",
-    question: "Which PayPal payment type should I use?",
-    answer:
-      "Use the PayPal payment method approved by the retreat’s payment processor and legal/payment advisor. Do not classify a retreat purchase as a personal Friends & Family transfer.",
+      "Yes. Approved participants may pay by credit card through PayPal. Please manually send your required payment this week.",
   },
   {
     id: "paypal-recipient",
     question: "Where do I send PayPal payments?",
-    answer: `Send PayPal payments to ${paymentPage.paypalRecipientEmail}. Carefully verify the recipient email and enter only the payment amount confirmed during your enrollment call.`,
+    answer: `Send PayPal payments to ${paymentPage.paypalRecipientEmail}. Verify the recipient email and send only the payment amount confirmed during your enrollment call. The retreat host will provide any additional PayPal instructions directly to you.`,
   },
   {
     id: "payment-amount",
     question: "How do I know how much to send?",
-    answer: `Your payment amount and schedule should have been confirmed during your call with one of the retreat hosts. If you are uncertain, do not estimate. Email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} before submitting payment.`,
+    answer: `Your payment amount should have been confirmed during your call with one of the retreat hosts. If you do not know the correct amount, do not guess. Email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} before submitting payment.`,
+  },
+  {
+    id: "when-to-pay",
+    question: "When do I need to send my PayPal payment?",
+    answer:
+      "Please manually send your required retreat payment through PayPal this week.",
   },
   {
     id: "invoices",
-    question: "Will I receive invoices for payment-plan installments?",
+    question: "Will I receive an invoice or automatic payment request?",
     answer:
-      "No. Invoices will not be issued for individual installments, and payments are not automatically charged. You are responsible for manually submitting each payment by its scheduled due date. Courtesy reminders may be sent, but they are not guaranteed.",
+      "No. An invoice or automatic payment request will not be sent. You are responsible for manually submitting this payment by its due date. If you selected a payment plan, each future installment must also be submitted manually according to the schedule provided to you.",
   },
   {
     id: "ach",
@@ -350,7 +362,7 @@ export const paymentFaqs = [
     id: "installments",
     question: "When are payment-plan installments due?",
     answer:
-      "Your payment schedule should have been confirmed during your call with one of the retreat hosts and will also be reflected in the Retreat Participation Agreement. You are responsible for remembering each due date and manually sending every payment on time.",
+      "Your payment schedule should have been confirmed during your call with one of the retreat hosts and will also be reflected in the Retreat Participation Agreement. You are responsible for manually submitting each installment by its scheduled due date.",
   },
   {
     id: "form-secures",

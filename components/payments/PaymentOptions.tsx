@@ -4,16 +4,17 @@ import { Building2, CreditCard } from "lucide-react";
 import { useId, useState } from "react";
 import {
   achInstructions,
+  bankPaymentAmountNotice,
   bankPaymentExtras,
+  beforeSendingChecklist,
   getPaymentOption,
   isPlaceholderValue,
   manualPaymentResponsibility,
   paymentOptions,
   paymentPage,
-  paypalPaymentInstructions,
+  paymentRequiredThisWeek,
   type PaymentOptionId,
   wireInstructions,
-  yourPaymentAmount,
 } from "@/data/payment-options";
 import { cn } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -116,13 +117,23 @@ export function PaymentOptions() {
                   {option.instructionsCopy}
                 </p>
 
-                <PaymentAmountNotice />
-                <ManualResponsibilityNotice />
-
                 {option.isBank ? (
-                  <BankInstructions showPlanNote={option.isPlan} />
+                  <>
+                    <BankPaymentAmountNotice />
+                    <ManualResponsibilityNotice />
+                    <BankInstructions showPlanNote={option.isPlan} />
+                  </>
                 ) : (
-                  <PaypalInstructions />
+                  <>
+                    <PaypalPrimaryInstructions />
+                    <ManualResponsibilityNotice />
+                    <BeforeSendingChecklist />
+                    <div className="mt-8">
+                      <ButtonLink href={paymentRequiredThisWeek.ctaHref}>
+                        {paymentRequiredThisWeek.ctaLabel}
+                      </ButtonLink>
+                    </div>
+                  </>
                 )}
               </div>
             </Reveal>
@@ -137,17 +148,45 @@ export function PaymentOptions() {
   );
 }
 
-function PaymentAmountNotice() {
+function PaypalPrimaryInstructions() {
+  return (
+    <div className="mt-8 rounded-sm border border-[var(--line)] bg-cream px-5 py-6 sm:px-7">
+      <h4 className="font-serif text-2xl text-ink sm:text-3xl">
+        {paymentRequiredThisWeek.heading}
+      </h4>
+      <p className="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
+        {paymentRequiredThisWeek.intro}
+      </p>
+      <p className="eyebrow mt-6 text-teal">
+        {paymentRequiredThisWeek.recipientLabel}
+      </p>
+      <p className="mt-2 font-serif text-2xl text-ink sm:text-3xl">
+        {paymentRequiredThisWeek.recipientEmail}
+      </p>
+      <p className="mt-5 text-base leading-relaxed text-ink-soft sm:text-lg">
+        {paymentRequiredThisWeek.amountCopy}
+      </p>
+      <p className="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
+        {paymentRequiredThisWeek.uncertainCopy}
+      </p>
+      <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+        {paymentRequiredThisWeek.hostNote}
+      </p>
+    </div>
+  );
+}
+
+function BankPaymentAmountNotice() {
   return (
     <div className="mt-8 rounded-sm border border-[var(--line)] bg-cream px-5 py-6 sm:px-7">
       <h4 className="font-serif text-2xl text-ink">
-        {yourPaymentAmount.heading}
+        {bankPaymentAmountNotice.heading}
       </h4>
       <p className="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
-        {yourPaymentAmount.copy}
+        {bankPaymentAmountNotice.copy}
       </p>
       <p className="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
-        {yourPaymentAmount.uncertain}
+        {bankPaymentAmountNotice.uncertain}
       </p>
     </div>
   );
@@ -159,9 +198,34 @@ function ManualResponsibilityNotice() {
       <h4 className="font-serif text-2xl text-ink">
         {manualPaymentResponsibility.heading}
       </h4>
+      <div className="mt-4 space-y-4 text-base leading-relaxed text-ink-soft sm:text-lg">
+        {manualPaymentResponsibility.copy.map((paragraph) => (
+          <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function BeforeSendingChecklist() {
+  return (
+    <div className="mt-6 rounded-sm border border-[var(--line)] bg-cream px-5 py-6 sm:px-7">
+      <h4 className="font-serif text-2xl text-ink">
+        {beforeSendingChecklist.heading}
+      </h4>
       <p className="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
-        {manualPaymentResponsibility.copy}
+        {beforeSendingChecklist.intro}
       </p>
+      <ul className="mt-4 space-y-3">
+        {beforeSendingChecklist.items.map((item) => (
+          <li
+            key={item}
+            className="flex gap-3 text-base leading-relaxed text-ink-soft before:mt-2 before:block before:size-1.5 before:shrink-0 before:rounded-full before:bg-coral before:content-['']"
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -187,47 +251,6 @@ function BankInstructions({ showPlanNote }: { showPlanNote: boolean }) {
         {bankPaymentExtras.feeNote}
       </p>
       <ButtonLink href="#payment-request">Confirm My Payment Choice</ButtonLink>
-    </div>
-  );
-}
-
-function PaypalInstructions() {
-  return (
-    <div className="mt-8 space-y-8">
-      <div className="rounded-sm border border-[var(--line)] bg-cream px-5 py-6 sm:px-7">
-        <h4 className="font-serif text-2xl text-ink">
-          {paypalPaymentInstructions.heading}
-        </h4>
-        <p className="eyebrow mt-6 text-teal">
-          {paypalPaymentInstructions.recipientLabel}
-        </p>
-        <p className="mt-2 font-serif text-2xl text-ink sm:text-3xl">
-          {paypalPaymentInstructions.recipientEmail}
-        </p>
-        <div className="mt-5 space-y-4 text-base leading-relaxed text-ink-soft sm:text-lg">
-          {paypalPaymentInstructions.copy.map((paragraph) => (
-            <p key={paragraph.slice(0, 48)}>{paragraph}</p>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <p className="eyebrow mb-3 text-coral">Important</p>
-        <ul className="space-y-2">
-          {paypalPaymentInstructions.important.map((item) => (
-            <li
-              key={item}
-              className="flex gap-3 text-base leading-relaxed text-ink-soft before:mt-2 before:block before:size-1.5 before:shrink-0 before:rounded-full before:bg-coral before:content-['']"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <ButtonLink href={paypalPaymentInstructions.ctaHref}>
-        {paypalPaymentInstructions.ctaLabel}
-      </ButtonLink>
     </div>
   );
 }
