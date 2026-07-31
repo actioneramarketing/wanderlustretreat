@@ -13,6 +13,8 @@ export const paymentPage = {
   region: retreatLocation.region,
   contactEmail: "fundingvillawanderlust@gmail.com",
   paypalRecipientEmail: "fundingvillawanderlust@gmail.com",
+  supportContactName: "Robert Evans",
+  supportContactEmail: "Robert@liveyourlist.com",
   /** Set true only after verified bank details are supplied below. */
   bankDetailsFinalized: false,
   bankDetailsPendingMessage:
@@ -42,7 +44,7 @@ export const paymentIntro = {
   heading: "Select the Option That Works Best for You",
   copy: "The retreat investment varies based on the payment method and whether you choose to pay in full or use an approved payment plan.",
   review:
-    "Review the four options below, choose the one that best fits your needs, and follow the corresponding instructions carefully.",
+    "Review the four options below, choose the one that best fits your needs, and follow the corresponding instructions carefully. Your specific payment amount and schedule should already have been confirmed during your call with one of the retreat hosts.",
   agreementNote: paymentPage.agreementNote,
 };
 
@@ -79,9 +81,9 @@ export const paymentOptions: PaymentOption[] = [
     description: "One payment by approved ACH or wire transfer.",
     badge: "Best Available Rate",
     formLabel: "$7,500 bank transfer paid in full",
-    instructionsHeading: "Pay $7,500 in Full by ACH or Wire Transfer",
+    instructionsHeading: "Pay in Full by ACH or Wire Transfer",
     instructionsCopy:
-      "This option provides the preferred retreat rate and completes your retreat payment in one approved bank transaction.",
+      "This option provides the preferred retreat rate and completes your retreat payment in one approved bank transaction using the amount confirmed during your enrollment call.",
     isBank: true,
     isPlan: false,
   },
@@ -93,12 +95,12 @@ export const paymentOptions: PaymentOption[] = [
     title: "Bank Transfer Payment Plan",
     method: "Scheduled ACH or wire transfer",
     description:
-      "Scheduled ACH or wire-transfer payments according to the Retreat Participation Agreement.",
+      "Manual ACH or wire-transfer payments on the schedule confirmed during your enrollment call.",
     badge: "Bank Payment Flexibility",
     formLabel: "$8,000 bank transfer payment plan",
-    instructionsHeading: "Choose the $8,000 Bank Transfer Payment Plan",
+    instructionsHeading: "Bank Transfer Payment Plan",
     instructionsCopy:
-      "This option allows you to complete your retreat investment through scheduled ACH or wire-transfer installments.",
+      "This option allows you to complete your retreat investment through scheduled ACH or wire-transfer installments. Payments are not automatically charged, and invoices will not be issued for individual installments.",
     isBank: true,
     isPlan: true,
   },
@@ -108,14 +110,14 @@ export const paymentOptions: PaymentOption[] = [
     amount: 8500,
     amountDisplay: "$8,500",
     title: "Credit Card Pay-in-Full Rate",
-    method: "PayPal commercial invoice",
+    method: "PayPal / credit card",
     description:
-      "One credit-card payment through an approved PayPal commercial payment or PayPal invoice.",
+      "One credit-card payment through the approved PayPal payment method.",
     badge: "Credit Card Pay in Full",
     formLabel: "$8,500 credit card paid in full through PayPal",
-    instructionsHeading: "Pay $8,500 in Full by Credit Card Through PayPal",
+    instructionsHeading: "Pay in Full by Credit Card Through PayPal",
     instructionsCopy:
-      "Credit-card payments are processed through an approved PayPal commercial transaction or personalized PayPal invoice.",
+      "Credit-card payments are completed through PayPal using the payment amount confirmed during your enrollment call.",
     isBank: false,
     isPlan: false,
   },
@@ -125,18 +127,46 @@ export const paymentOptions: PaymentOption[] = [
     amount: 9000,
     amountDisplay: "$9,000",
     title: "Credit Card Payment Plan",
-    method: "Scheduled PayPal invoices",
+    method: "Scheduled PayPal payments",
     description:
-      "Scheduled credit-card payments through approved PayPal commercial invoices or payment requests according to the Retreat Participation Agreement.",
+      "Manual credit-card payments through PayPal on the schedule confirmed during your enrollment call.",
     badge: "Maximum Payment Flexibility",
     formLabel: "$9,000 credit card payment plan through PayPal",
-    instructionsHeading: "Choose the $9,000 Credit Card Payment Plan",
+    instructionsHeading: "Credit Card Payment Plan Through PayPal",
     instructionsCopy:
-      "This option allows you to complete your retreat investment through scheduled credit-card payments using approved PayPal commercial invoices or payment requests.",
+      "This option allows you to complete your retreat investment through scheduled credit-card payments via PayPal. Payments are not automatically charged, and invoices will not be issued for individual installments.",
     isBank: false,
     isPlan: true,
   },
 ];
+
+export const yourPaymentAmount = {
+  heading: "Your Payment Amount",
+  copy: "The amount and payment schedule associated with your retreat enrollment should have been confirmed during your call with one of the retreat hosts. Enter and send only the amount you were instructed to pay.",
+  uncertain: `If you are uncertain about your payment amount or upcoming due date, do not estimate or submit payment until you have confirmed it. Email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} for assistance.`,
+};
+
+export const manualPaymentResponsibility = {
+  heading: "Manual Payment Responsibility",
+  copy: "Payments are not automatically charged, and invoices will not be issued for individual installments. You are responsible for manually submitting each payment by its scheduled due date. The retreat team may send courtesy reminders, but reminders are not guaranteed and do not transfer responsibility away from you. You remain responsible for making every payment in full and on time.",
+};
+
+export const paypalPaymentInstructions = {
+  heading: "Paying Through PayPal",
+  recipientLabel: "Send the payment to",
+  recipientEmail: paymentPage.paypalRecipientEmail,
+  copy: [
+    "Enter the payment amount confirmed during your retreat enrollment call. Carefully verify the recipient email and payment amount before submitting the transaction.",
+    `If you do not know the correct amount to send, stop and email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} before completing the payment.`,
+  ],
+  important: [
+    "Use the PayPal payment method approved by the retreat’s payment processor and legal/payment advisor.",
+    "Do not classify a retreat purchase as a personal Friends & Family transfer.",
+    "Verify the recipient email before submitting payment.",
+  ],
+  ctaLabel: "Confirm My Payment Choice",
+  ctaHref: "#payment-request",
+};
 
 export const achInstructions = {
   label: "ACH Transfer",
@@ -165,68 +195,21 @@ export const wireInstructions = {
 
 export const bankPaymentExtras = {
   paymentReference: "Wanderlust 2027 – [Participant Full Name]",
+  paymentAmountLabel: "Payment amount",
+  paymentAmountValue:
+    "Use only the amount confirmed during your enrollment call",
   feeNote:
     "Bank charges, intermediary-bank charges, foreign-exchange costs, and transfer fees are the participant’s responsibility unless the final agreement states otherwise. The full required USD amount must be received.",
-};
-
-export const bankPlanPlaceholders = {
-  totalLabel: "Total retreat investment",
-  totalAmount: "$8,000 USD",
-  fields: [
-    { label: "Initial payment", value: "[ADD INITIAL PAYMENT]" },
-    { label: "Number of remaining payments", value: "[ADD NUMBER OF PAYMENTS]" },
-    { label: "Remaining payment amount", value: "[ADD PAYMENT AMOUNT]" },
-    { label: "Payment schedule", value: "[ADD DUE DATES]" },
-    { label: "Final balance deadline", value: "[ADD FINAL DEADLINE]" },
-  ],
   officialNote:
     "Your payment plan becomes official only after the Retreat Participation Agreement has been completed and the first required payment has been received.",
 };
 
-export const cardFullWorkflow = {
-  buttonLabel: "Request My $8,500 PayPal Invoice",
-  steps: [
-    "The participant selects the credit-card pay-in-full option.",
-    "The participant provides their name, email, Retreat Leader, and payment choice.",
-    "The retreat team sends a personalized PayPal invoice or approved commercial payment request for $8,500.",
-    "The participant pays the invoice using an available credit-card option.",
-    "The participant saves the PayPal confirmation.",
-    "The participant informs their Retreat Leader that payment is complete.",
-  ],
-  important: [
-    "Do not choose Friends & Family.",
-    "This is not a personal transfer.",
-    "Do not misclassify a retreat purchase.",
-  ],
-};
-
-export const cardPlanPlaceholders = {
-  totalLabel: "Total retreat investment",
-  totalAmount: "$9,000 USD",
-  fields: [
-    { label: "Initial payment", value: "[ADD INITIAL PAYMENT]" },
-    { label: "Number of remaining payments", value: "[ADD NUMBER OF PAYMENTS]" },
-    { label: "Remaining payment amount", value: "[ADD PAYMENT AMOUNT]" },
-    { label: "Payment schedule", value: "[ADD DUE DATES]" },
-    { label: "Final balance deadline", value: "[ADD FINAL DEADLINE]" },
-  ],
-  buttonLabel: "Request My Credit Card Payment Plan",
-  steps: [
-    "Select the credit-card payment-plan option.",
-    "Submit your information and identify the Retreat Leader who invited you.",
-    "The retreat team confirms the installment schedule.",
-    "The retreat team sends each required PayPal invoice or commercial payment request.",
-    "Pay each invoice by its stated due date.",
-    "Keep payment confirmations and notify your Retreat Leader.",
-  ],
-};
-
 export const paymentForm = {
   heading: "Confirm Your Payment Choice",
-  copy: "Tell us which payment option you have selected. The retreat team will send any personalized invoice, bank instructions, agreement, or next steps required to complete your enrollment.",
+  copy: "Tell us which payment option you have selected. The retreat team will review your selection and send any bank instructions, agreement, or next steps required to complete your enrollment.",
   submitLabel: "Submit Payment Selection",
   successMessage:
-    "Thank you. Your payment selection has been received. The retreat team will review it and send any required payment instructions, agreement, invoice, or next steps.",
+    "Thank you. Your payment selection has been received. The retreat team will review it and send any required payment instructions, agreement, or next steps.",
   bankMethodOptions: [
     "ACH",
     "Domestic wire",
@@ -239,6 +222,8 @@ export const paymentForm = {
     "I have already sent payment",
     "I need help choosing an option",
   ],
+  paymentAmountConfirmation:
+    "I confirm that I am sending the payment amount provided during my retreat enrollment call and understand that I am responsible for manually submitting all future payments by their scheduled due dates.",
   acknowledgments: [
     "I understand that submitting this form does not by itself secure my place.",
     "My participation is confirmed only after required payment and retreat agreements are completed.",
@@ -253,6 +238,7 @@ export const afterPayment = {
     "Submit the confirmation reference through this page if you have not already done so.",
     "Notify the Retreat Leader who invited you.",
     "Watch for your Retreat Participation Agreement and logistics information.",
+    "Remember each upcoming due date and manually send every payment on time.",
     "Do not book nonrefundable travel until the retreat team confirms the appropriate travel details.",
   ],
 };
@@ -276,12 +262,13 @@ export const paymentSafety = {
     "Contact the retreat team before paying if any instruction appears different.",
     "Include your full name and “Wanderlust 2027” in the payment reference.",
     "Keep your receipt or transaction confirmation.",
+    `If you do not know the correct amount to send, email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} before submitting payment.`,
   ],
 };
 
 export const paymentComparison = {
   heading: "A Clear Look at Your Options",
-  note: "The total investment reflects both the payment method and payment schedule selected.",
+  note: "The total investment reflects both the payment method and payment schedule selected. Send only the amount confirmed during your enrollment call.",
   items: [
     {
       label: "Lowest Available Rate",
@@ -296,7 +283,7 @@ export const paymentComparison = {
     {
       label: "Credit Card Pay in Full",
       amount: "$8,500",
-      detail: "One approved PayPal commercial payment",
+      detail: "One approved PayPal payment",
     },
     {
       label: "Maximum Flexibility",
@@ -317,24 +304,29 @@ export const paymentFaqs = [
     id: "credit-card",
     question: "Can I pay by credit card?",
     answer:
-      "Yes. Approved participants may pay by credit card through a PayPal commercial transaction or personalized PayPal invoice.",
+      "Yes. Approved participants may pay by credit card through the approved PayPal payment method.",
   },
   {
     id: "paypal-type",
     question: "Which PayPal payment type should I use?",
     answer:
-      "Use the approved commercial payment request or PayPal invoice provided by the retreat team. Do not classify a retreat purchase as a personal Friends & Family transfer.",
+      "Use the PayPal payment method approved by the retreat’s payment processor and legal/payment advisor. Do not classify a retreat purchase as a personal Friends & Family transfer.",
   },
   {
-    id: "paypal-sender",
-    question: "Where will my PayPal invoice be sent from?",
-    answer: `The retreat team currently uses: ${paymentPage.paypalRecipientEmail}. Participants should verify the sender and invoice details before paying.`,
+    id: "paypal-recipient",
+    question: "Where do I send PayPal payments?",
+    answer: `Send PayPal payments to ${paymentPage.paypalRecipientEmail}. Carefully verify the recipient email and enter only the payment amount confirmed during your enrollment call.`,
   },
   {
-    id: "direct-paypal",
-    question: "Can I send the money directly without an invoice?",
+    id: "payment-amount",
+    question: "How do I know how much to send?",
+    answer: `Your payment amount and schedule should have been confirmed during your call with one of the retreat hosts. If you are uncertain, do not estimate. Email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} before submitting payment.`,
+  },
+  {
+    id: "invoices",
+    question: "Will I receive invoices for payment-plan installments?",
     answer:
-      "Please follow the personalized payment instructions supplied by the retreat team. A PayPal invoice or approved commercial payment request is preferred so the retreat, amount, participant, and terms can be clearly identified.",
+      "No. Invoices will not be issued for individual installments, and payments are not automatically charged. You are responsible for manually submitting each payment by its scheduled due date. Courtesy reminders may be sent, but they are not guaranteed.",
   },
   {
     id: "ach",
@@ -358,7 +350,7 @@ export const paymentFaqs = [
     id: "installments",
     question: "When are payment-plan installments due?",
     answer:
-      "The exact amounts and due dates will be confirmed in the Retreat Participation Agreement and payment schedule.",
+      "Your payment schedule should have been confirmed during your call with one of the retreat hosts and will also be reflected in the Retreat Participation Agreement. You are responsible for remembering each due date and manually sending every payment on time.",
   },
   {
     id: "form-secures",
@@ -375,8 +367,7 @@ export const paymentFaqs = [
   {
     id: "help",
     question: "What if I need help?",
-    answer:
-      "Use the payment request form or contact the retreat team before sending funds.",
+    answer: `Use the payment request form or email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} before sending funds.`,
   },
 ];
 

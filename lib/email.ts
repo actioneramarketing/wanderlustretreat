@@ -355,7 +355,7 @@ export function buildPaymentSelectionConfirmationHtml(
                 <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#4a7c7a;">The Wanderlust Revival Retreat</p>
                 <h1 style="margin:0 0 16px;font-family:Georgia,serif;font-size:28px;font-weight:400;color:#1a2e24;">Thank you, ${name}.</h1>
                 <p style="margin:0 0 12px;font-family:Arial,sans-serif;font-size:16px;line-height:1.65;color:#3d4a42;">
-                  Your payment selection has been received. The retreat team will review it and send any required payment instructions, agreement, invoice, or next steps.
+                  Your payment selection has been received. The retreat team will review it and send any required payment instructions, agreement, or next steps.
                 </p>
                 <p style="margin:0;font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#6b6258;">
                   Submitting this form does not by itself secure your place. Please also notify the Retreat Leader who invited you after you complete payment.

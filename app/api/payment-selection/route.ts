@@ -17,6 +17,7 @@ type Body = Omit<
 > & {
   company?: string;
   consent?: boolean;
+  paymentAmountConfirmation?: boolean;
 };
 
 function isConfigured() {
@@ -94,6 +95,14 @@ function validatePayload(
     return {
       ok: false,
       error: "Please acknowledge the enrollment statements to continue.",
+    };
+  }
+
+  if (!body.paymentAmountConfirmation) {
+    return {
+      ok: false,
+      error:
+        "Please confirm your payment amount and manual payment responsibility to continue.",
     };
   }
 

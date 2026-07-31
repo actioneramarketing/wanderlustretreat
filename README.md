@@ -183,7 +183,7 @@ Confirm or complete the following before public launch:
 - [ ] Confirm final pricing structure
 - [ ] Confirm deposit and payment plans
 - [ ] Replace `/payments` ACH/wire placeholders and set `bankDetailsFinalized: true`
-- [ ] Confirm payment-plan installment amounts and due dates in `data/payment-options.ts`
+- [ ] Confirm each participant’s payment amount and schedule during their enrollment call (amounts are not calculated on `/payments`)
 - [ ] Confirm retreat capacity
 - [ ] Confirm airport and transportation details
 - [ ] Confirm leader biographies and portraits

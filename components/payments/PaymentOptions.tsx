@@ -5,15 +5,15 @@ import { useId, useState } from "react";
 import {
   achInstructions,
   bankPaymentExtras,
-  bankPlanPlaceholders,
-  cardFullWorkflow,
-  cardPlanPlaceholders,
   getPaymentOption,
   isPlaceholderValue,
+  manualPaymentResponsibility,
   paymentOptions,
   paymentPage,
+  paypalPaymentInstructions,
   type PaymentOptionId,
   wireInstructions,
+  yourPaymentAmount,
 } from "@/data/payment-options";
 import { cn } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -82,7 +82,8 @@ export function PaymentOptions() {
                     aria-controls={instructionsId}
                     className={cn(
                       "btn-primary mt-8 min-h-11 w-full sm:w-auto",
-                      isSelected && "ring-2 ring-coral/40 ring-offset-2 ring-offset-cream",
+                      isSelected &&
+                        "ring-2 ring-coral/40 ring-offset-2 ring-offset-cream",
                     )}
                     onClick={() => selectOption(item.id)}
                   >
@@ -115,10 +116,14 @@ export function PaymentOptions() {
                   {option.instructionsCopy}
                 </p>
 
-                {option.id === "bank-full" ? <BankFullInstructions /> : null}
-                {option.id === "bank-plan" ? <BankPlanInstructions /> : null}
-                {option.id === "card-full" ? <CardFullInstructions /> : null}
-                {option.id === "card-plan" ? <CardPlanInstructions /> : null}
+                <PaymentAmountNotice />
+                <ManualResponsibilityNotice />
+
+                {option.isBank ? (
+                  <BankInstructions showPlanNote={option.isPlan} />
+                ) : (
+                  <PaypalInstructions />
+                )}
               </div>
             </Reveal>
           ) : (
@@ -132,73 +137,84 @@ export function PaymentOptions() {
   );
 }
 
-function BankFullInstructions() {
+function PaymentAmountNotice() {
   return (
-    <div className="mt-8 space-y-8">
-      {!paymentPage.bankDetailsFinalized ? (
-        <BankPendingNotice />
-      ) : null}
-      <InstructionBlock
-        title={achInstructions.label}
-        amount="$7,500 USD"
-        fields={achInstructions.fields}
-      />
-      <InstructionBlock
-        title={wireInstructions.label}
-        amount="$7,500 USD"
-        fields={wireInstructions.fields}
-      />
-      <p className="text-sm leading-relaxed text-muted sm:text-base">
-        {bankPaymentExtras.feeNote}
+    <div className="mt-8 rounded-sm border border-[var(--line)] bg-cream px-5 py-6 sm:px-7">
+      <h4 className="font-serif text-2xl text-ink">
+        {yourPaymentAmount.heading}
+      </h4>
+      <p className="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
+        {yourPaymentAmount.copy}
+      </p>
+      <p className="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
+        {yourPaymentAmount.uncertain}
       </p>
     </div>
   );
 }
 
-function BankPlanInstructions() {
+function ManualResponsibilityNotice() {
+  return (
+    <div className="mt-6 rounded-sm border border-gold/35 bg-cream px-5 py-6 sm:px-7">
+      <h4 className="font-serif text-2xl text-ink">
+        {manualPaymentResponsibility.heading}
+      </h4>
+      <p className="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
+        {manualPaymentResponsibility.copy}
+      </p>
+    </div>
+  );
+}
+
+function BankInstructions({ showPlanNote }: { showPlanNote: boolean }) {
   return (
     <div className="mt-8 space-y-8">
-      <div className="border border-[var(--line)] bg-cream px-5 py-5">
-        <p className="eyebrow text-teal">{bankPlanPlaceholders.totalLabel}</p>
-        <p className="mt-2 font-serif text-4xl text-jungle">
-          {bankPlanPlaceholders.totalAmount}
-        </p>
-      </div>
-      <DetailList fields={bankPlanPlaceholders.fields} />
       {!paymentPage.bankDetailsFinalized ? <BankPendingNotice /> : null}
       <InstructionBlock
         title={achInstructions.label}
-        amount={bankPlanPlaceholders.totalAmount}
         fields={achInstructions.fields}
       />
       <InstructionBlock
         title={wireInstructions.label}
-        amount={bankPlanPlaceholders.totalAmount}
         fields={wireInstructions.fields}
       />
-      <p className="text-base leading-relaxed text-ink-soft">
-        {bankPlanPlaceholders.officialNote}
-      </p>
+      {showPlanNote ? (
+        <p className="text-base leading-relaxed text-ink-soft">
+          {bankPaymentExtras.officialNote}
+        </p>
+      ) : null}
       <p className="text-sm leading-relaxed text-muted sm:text-base">
         {bankPaymentExtras.feeNote}
       </p>
+      <ButtonLink href="#payment-request">Confirm My Payment Choice</ButtonLink>
     </div>
   );
 }
 
-function CardFullInstructions() {
+function PaypalInstructions() {
   return (
     <div className="mt-8 space-y-8">
-      <div className="border border-[var(--line)] bg-cream px-5 py-5">
-        <p className="eyebrow text-teal">Payment recipient</p>
-        <p className="mt-2 font-serif text-2xl text-ink sm:text-3xl">
-          {paymentPage.paypalRecipientEmail}
+      <div className="rounded-sm border border-[var(--line)] bg-cream px-5 py-6 sm:px-7">
+        <h4 className="font-serif text-2xl text-ink">
+          {paypalPaymentInstructions.heading}
+        </h4>
+        <p className="eyebrow mt-6 text-teal">
+          {paypalPaymentInstructions.recipientLabel}
         </p>
+        <p className="mt-2 font-serif text-2xl text-ink sm:text-3xl">
+          {paypalPaymentInstructions.recipientEmail}
+        </p>
+        <div className="mt-5 space-y-4 text-base leading-relaxed text-ink-soft sm:text-lg">
+          {paypalPaymentInstructions.copy.map((paragraph) => (
+            <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+          ))}
+        </div>
       </div>
+
       <div>
         <p className="eyebrow mb-3 text-coral">Important</p>
         <ul className="space-y-2">
-          {cardFullWorkflow.important.map((item) => (
+          {paypalPaymentInstructions.important.map((item) => (
             <li
               key={item}
               className="flex gap-3 text-base leading-relaxed text-ink-soft before:mt-2 before:block before:size-1.5 before:shrink-0 before:rounded-full before:bg-coral before:content-['']"
@@ -208,49 +224,9 @@ function CardFullInstructions() {
           ))}
         </ul>
       </div>
-      <ol className="space-y-3 border-l border-[var(--line)] pl-5">
-        {cardFullWorkflow.steps.map((step, index) => (
-          <li key={step} className="text-base leading-relaxed text-ink-soft">
-            <span className="mr-2 font-semibold text-coral">
-              {index + 1}.
-            </span>
-            {step}
-          </li>
-        ))}
-      </ol>
-      <ButtonLink href="#payment-request">{cardFullWorkflow.buttonLabel}</ButtonLink>
-    </div>
-  );
-}
 
-function CardPlanInstructions() {
-  return (
-    <div className="mt-8 space-y-8">
-      <div className="border border-[var(--line)] bg-cream px-5 py-5">
-        <p className="eyebrow text-teal">{cardPlanPlaceholders.totalLabel}</p>
-        <p className="mt-2 font-serif text-4xl text-jungle">
-          {cardPlanPlaceholders.totalAmount}
-        </p>
-      </div>
-      <DetailList fields={cardPlanPlaceholders.fields} />
-      <div className="border border-[var(--line)] bg-cream px-5 py-5">
-        <p className="eyebrow text-teal">Payment recipient</p>
-        <p className="mt-2 font-serif text-2xl text-ink sm:text-3xl">
-          {paymentPage.paypalRecipientEmail}
-        </p>
-      </div>
-      <ol className="space-y-3 border-l border-[var(--line)] pl-5">
-        {cardPlanPlaceholders.steps.map((step, index) => (
-          <li key={step} className="text-base leading-relaxed text-ink-soft">
-            <span className="mr-2 font-semibold text-coral">
-              {index + 1}.
-            </span>
-            {step}
-          </li>
-        ))}
-      </ol>
-      <ButtonLink href="#payment-request">
-        {cardPlanPlaceholders.buttonLabel}
+      <ButtonLink href={paypalPaymentInstructions.ctaHref}>
+        {paypalPaymentInstructions.ctaLabel}
       </ButtonLink>
     </div>
   );
@@ -269,11 +245,9 @@ function BankPendingNotice() {
 
 function InstructionBlock({
   title,
-  amount,
   fields,
 }: {
   title: string;
-  amount: string;
   fields: Array<{ label: string; value: string }>;
 }) {
   const canCopy = paymentPage.bankDetailsFinalized;
@@ -284,7 +258,10 @@ function InstructionBlock({
       <DetailList
         fields={[
           ...fields,
-          { label: "Payment amount", value: amount },
+          {
+            label: bankPaymentExtras.paymentAmountLabel,
+            value: bankPaymentExtras.paymentAmountValue,
+          },
           {
             label: "Payment reference",
             value: bankPaymentExtras.paymentReference,

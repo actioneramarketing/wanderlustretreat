@@ -26,6 +26,7 @@ type FormState = {
   transactionReference: string;
   questions: string;
   consent: boolean;
+  paymentAmountConfirmation: boolean;
   company: string;
 };
 
@@ -46,6 +47,7 @@ const initialState: FormState = {
   transactionReference: "",
   questions: "",
   consent: false,
+  paymentAmountConfirmation: false,
   company: "",
 };
 
@@ -71,6 +73,10 @@ function validate(values: FormState): FormErrors {
   }
   if (!values.consent) {
     errors.consent = "Please acknowledge the enrollment statements to continue.";
+  }
+  if (!values.paymentAmountConfirmation) {
+    errors.paymentAmountConfirmation =
+      "Please confirm your payment amount and manual payment responsibility to continue.";
   }
   return errors;
 }
@@ -358,7 +364,43 @@ export function PaymentRequestForm() {
               </div>
             ) : null}
 
-            <div className="mt-8">
+            <div className="mt-8 space-y-5">
+              <div>
+                <label className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft sm:text-[0.9375rem]">
+                  <input
+                    type="checkbox"
+                    checked={values.paymentAmountConfirmation}
+                    onChange={(event) =>
+                      update(
+                        "paymentAmountConfirmation",
+                        event.target.checked,
+                      )
+                    }
+                    className="mt-1 size-4 min-h-4 min-w-4 accent-coral"
+                    aria-invalid={Boolean(errors.paymentAmountConfirmation)}
+                    aria-describedby={
+                      errors.paymentAmountConfirmation
+                        ? "payment-amount-confirmation-error"
+                        : undefined
+                    }
+                    required
+                  />
+                  <span>
+                    {paymentForm.paymentAmountConfirmation}{" "}
+                    <span className="text-coral">*</span>
+                  </span>
+                </label>
+                {errors.paymentAmountConfirmation ? (
+                  <p
+                    id="payment-amount-confirmation-error"
+                    className="mt-2 text-sm text-coral"
+                    role="alert"
+                  >
+                    {errors.paymentAmountConfirmation}
+                  </p>
+                ) : null}
+              </div>
+
               <button
                 type="submit"
                 disabled={submitting}
@@ -366,7 +408,7 @@ export function PaymentRequestForm() {
               >
                 {submitting ? "Sending…" : paymentForm.submitLabel}
               </button>
-              <p className="mt-4 text-sm text-muted">
+              <p className="text-sm text-muted">
                 Submitting this form does not by itself secure your place.
               </p>
             </div>
