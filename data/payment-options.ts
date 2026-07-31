@@ -16,7 +16,7 @@ export const paymentPage = {
   supportContactName: "Robert Evans",
   supportContactEmail: "Robert@liveyourlist.com",
   /** Set true only after verified bank details are supplied below. */
-  bankDetailsFinalized: false,
+  bankDetailsFinalized: true,
   bankDetailsPendingMessage:
     "Bank-transfer instructions are being finalized. Please contact the retreat team before sending payment.",
   agreementNote:
@@ -157,7 +157,7 @@ export const paymentRequiredThisWeek = {
 export const manualPaymentResponsibility = {
   heading: "Important: Payments Are Submitted Manually",
   copy: [
-    "An invoice or automatic payment request will not be sent. You are responsible for manually submitting this payment by its due date.",
+    "An invoice or automatic payment request will not be sent. You are responsible for manually submitting your payment by its due date.",
     "If you selected a payment plan, each future installment must also be manually submitted according to the payment schedule provided to you. The retreat team may send courtesy reminders, but you remain responsible for making every payment in full and on time.",
   ],
 };
@@ -173,43 +173,104 @@ export const beforeSendingChecklist = {
   ],
 };
 
-/** Bank-option amount guidance (amounts are never calculated on this page). */
-export const bankPaymentAmountNotice = {
-  heading: "Your Payment Amount",
-  copy: "Your required payment amount should have been confirmed during your call with one of the retreat hosts. Please send only the amount you were instructed to pay.",
-  uncertain: `If you do not know the correct amount, do not guess or submit a payment until you have confirmed it. Email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} for assistance.`,
+export type BankDetailField = {
+  label: string;
+  value: string;
+  /** Multi-line address or bank location block. */
+  multiline?: boolean;
+  /** Show a one-click copy control for accurate entry. */
+  copyable?: boolean;
+  /** Render as tabular digits and discourage telephone auto-linking. */
+  numeric?: boolean;
 };
 
-export const achInstructions = {
-  label: "ACH Transfer",
-  fields: [
-    { label: "Account holder", value: "[ADD ACCOUNT HOLDER]" },
-    { label: "Bank name", value: "[ADD BANK NAME]" },
-    { label: "Routing number", value: "[ADD ACH ROUTING NUMBER]" },
-    { label: "Account number", value: "[ADD ACCOUNT NUMBER]" },
-    { label: "Account type", value: "[ADD ACCOUNT TYPE]" },
-  ],
+const usBankSharedFields: BankDetailField[] = [
+  {
+    label: "Recipient Name",
+    value: "Jaime Murphy",
+    copyable: true,
+  },
+  {
+    label: "Account Type",
+    value: "Checking",
+    copyable: true,
+  },
+  {
+    label: "Routing Number",
+    value: "084009519",
+    copyable: true,
+    numeric: true,
+  },
+  {
+    label: "Account Number",
+    value: "124449821911639",
+    copyable: true,
+    numeric: true,
+  },
+  {
+    label: "Bank Name and Address",
+    value: "Wise US Inc.\n108 W 13th St\nWilmington, DE 19801\nUnited States",
+    multiline: true,
+    copyable: true,
+  },
+  {
+    label: "Recipient Address",
+    value:
+      "Jaime Murphy\n7204 West Coast Highway 45\nNewport Beach, CA 92663",
+    multiline: true,
+    copyable: true,
+  },
+];
+
+export const domesticWireTransfer = {
+  optionLabel: "Option 1",
+  heading: "Domestic Wire Transfer",
+  amount: {
+    heading: "Amount to Send",
+    copy: "The amount you need to send should have been confirmed during your call with one of the retreat hosts. Send only the amount you were instructed to pay.",
+    uncertain: `If you do not know the correct amount, do not guess. Email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} before submitting your payment.`,
+  },
+  fields: usBankSharedFields,
+  note: "These details are for a domestic wire transfer from a bank located in the United States.",
 };
 
-export const wireInstructions = {
-  label: "Wire Transfer",
-  fields: [
-    { label: "Beneficiary name", value: "[ADD BENEFICIARY NAME]" },
-    { label: "Beneficiary address", value: "[ADD BENEFICIARY ADDRESS]" },
-    { label: "Bank name", value: "[ADD BANK NAME]" },
-    { label: "Bank address", value: "[ADD BANK ADDRESS]" },
-    { label: "SWIFT/BIC", value: "[ADD SWIFT OR BIC]" },
-    { label: "ABA or wire-routing number", value: "[ADD WIRE ROUTING NUMBER]" },
-    { label: "Account number or IBAN", value: "[ADD ACCOUNT OR IBAN]" },
-    { label: "Intermediary-bank information", value: "[ADD IF REQUIRED]" },
+export const achBankTransfer = {
+  optionLabel: "Option 2",
+  heading: "ACH Bank Transfer",
+  amount: {
+    heading: "Amount to Send",
+    value: "$7,722",
+  },
+  fields: usBankSharedFields,
+  note: "These details are for an ACH transfer from a bank located in the United States.",
+};
+
+export const internationalPaymentNotice = {
+  heading: "Sending Payment From Outside the United States?",
+  copy: "Do not use the domestic ACH or wire-transfer instructions above. An international SWIFT transfer requires different payment information. Please contact the retreat team to request the correct international SWIFT transfer details before sending your payment.",
+};
+
+export const bankPaymentReference = {
+  heading: "Payment Reference",
+  copy: "When your bank permits a memo or reference field, include the following:",
+  value: "Wanderlust Retreat – [Participant’s Full Name]",
+};
+
+export const bankPaymentConfirmation = {
+  heading: "Confirm Your Transfer",
+  copy: "After sending the transfer, submit confirmation through this page or email the retreat team with:",
+  items: [
+    "Participant’s full name",
+    "Amount sent",
+    "Date sent",
+    "Transfer method: ACH or domestic wire",
+    "Transaction or confirmation number, when available",
   ],
+  privacyNote:
+    "Do not include your bank-account number in the confirmation.",
 };
 
 export const bankPaymentExtras = {
-  paymentReference: "Wanderlust 2027 – [Participant Full Name]",
-  paymentAmountLabel: "Payment amount",
-  paymentAmountValue:
-    "Use only the amount confirmed during your enrollment call",
   feeNote:
     "Bank charges, intermediary-bank charges, foreign-exchange costs, and transfer fees are the participant’s responsibility unless the final agreement states otherwise. The full required USD amount must be received.",
   officialNote:
@@ -247,7 +308,7 @@ export const afterPayment = {
   heading: "After You Make a Payment",
   steps: [
     "Save your bank or PayPal confirmation.",
-    "Submit the confirmation reference through this page if you have not already done so.",
+    "For bank transfers, submit or email confirmation with your full name, amount sent, date sent, transfer method (ACH or domestic wire), and transaction number when available. Do not include your bank-account number.",
     "Notify the Retreat Leader who invited you.",
     "Watch for your Retreat Participation Agreement and logistics information.",
     "Remember each upcoming due date and manually send every payment on time.",
@@ -272,7 +333,7 @@ export const paymentSafety = {
     "Verify that payment instructions match the information on this official page or a personalized message from the retreat team.",
     "Never send payment to a different email address or bank account based only on an unexpected message.",
     "Contact the retreat team before paying if any instruction appears different.",
-    "Include your full name and “Wanderlust 2027” in the payment reference.",
+    "Include “Wanderlust Retreat – [Participant’s Full Name]” in the transfer memo or reference field when your bank permits it.",
     "Keep your receipt or transaction confirmation.",
     `If you do not know the correct amount to send, email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} before submitting payment.`,
   ],
@@ -344,13 +405,19 @@ export const paymentFaqs = [
     id: "ach",
     question: "Can I pay by ACH?",
     answer:
-      "Yes, once final ACH instructions have been provided and verified.",
+      "Yes. Use the ACH Bank Transfer details on this page for transfers from a bank located in the United States.",
   },
   {
     id: "wire",
-    question: "Can I pay by wire transfer?",
+    question: "Can I pay by domestic wire transfer?",
     answer:
-      "Yes. Domestic or international wire instructions will be provided where appropriate.",
+      "Yes. Use the Domestic Wire Transfer details on this page for wires from a bank located in the United States.",
+  },
+  {
+    id: "international",
+    question: "Can I send payment from outside the United States?",
+    answer:
+      "Do not use the domestic ACH or wire-transfer instructions on this page. An international SWIFT transfer requires different payment information. Contact the retreat team to request the correct international SWIFT transfer details before sending payment.",
   },
   {
     id: "fees",

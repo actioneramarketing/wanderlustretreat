@@ -19,9 +19,31 @@ export const metadata: Metadata = {
     follow: false,
     nocache: true,
     noarchive: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+      nosnippet: true,
+    },
   },
   alternates: {
     canonical: "/payments",
+  },
+  openGraph: {
+    title: "Retreat Payment Options | The Wanderlust Revival Retreat",
+    description:
+      "Invitation-only payment options for The Wanderlust Revival Retreat.",
+    url: "/payments",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Retreat Payment Options | The Wanderlust Revival Retreat",
+    description:
+      "Invitation-only payment options for The Wanderlust Revival Retreat.",
+  },
+  other: {
+    "format-detection": "telephone=no",
   },
 };
 

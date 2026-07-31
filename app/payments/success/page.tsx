@@ -10,6 +10,15 @@ export const metadata: Metadata = {
     follow: false,
     nocache: true,
     noarchive: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+      nosnippet: true,
+    },
+  },
+  other: {
+    "format-detection": "telephone=no",
   },
 };
 

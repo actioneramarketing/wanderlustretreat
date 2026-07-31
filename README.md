@@ -116,7 +116,7 @@ Most content is centralized so you do not need to hunt through large JSX files:
 | `data/content.ts` | Shared section copy |
 | `data/images.ts` | Image paths, alt text, future photo placeholders |
 | `data/leader-opportunity.ts` | Leader recruitment page content and commitment model |
-| `data/payment-options.ts` | Invitation-only `/payments` options, bank placeholders, PayPal details |
+| `data/payment-options.ts` | Invitation-only `/payments` options, US bank-transfer details, PayPal details |
 
 ### Unlisted payment page
 
@@ -124,9 +124,11 @@ The `/payments` route is intentionally unlisted and noindexed, but anyone with t
 
 - Not linked in desktop or mobile navigation
 - Not included in `app/sitemap.ts`
-- Uses `robots: { index: false, follow: false }`
-- Edit payment amounts, bank placeholders, and PayPal details in `data/payment-options.ts`
-- Set `bankDetailsFinalized: true` only after verified bank instructions are supplied
+- Disallowed in `app/robots.ts`
+- Uses `robots: { index: false, follow: false }` (noindex/nofollow)
+- Page metadata and Open Graph copy must not include banking details
+- Edit payment amounts, US ACH/wire details, and PayPal details in `data/payment-options.ts`
+- Domestic ACH/wire details are finalized (`bankDetailsFinalized: true`); international SWIFT details are provided on request only
 
 ### Confirmed retreat dates
 
@@ -182,8 +184,8 @@ Confirm or complete the following before public launch:
 - [x] Confirm retreat year — May 30–June 6, 2027
 - [ ] Confirm final pricing structure
 - [ ] Confirm deposit and payment plans
-- [ ] Replace `/payments` ACH/wire placeholders and set `bankDetailsFinalized: true`
-- [ ] Confirm each participant’s payment amount and schedule during their enrollment call (amounts are not calculated on `/payments`)
+- [x] Replace `/payments` ACH/wire placeholders and set `bankDetailsFinalized: true`
+- [ ] Confirm each participant’s payment amount and schedule during their enrollment call (wire amounts are host-confirmed; ACH amount is listed on `/payments`)
 - [ ] Confirm retreat capacity
 - [ ] Confirm airport and transportation details
 - [ ] Confirm leader biographies and portraits

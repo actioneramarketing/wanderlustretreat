@@ -3,18 +3,20 @@
 import { Building2, CreditCard } from "lucide-react";
 import { useId, useState } from "react";
 import {
-  achInstructions,
-  bankPaymentAmountNotice,
+  achBankTransfer,
+  bankPaymentConfirmation,
   bankPaymentExtras,
+  bankPaymentReference,
   beforeSendingChecklist,
+  domesticWireTransfer,
   getPaymentOption,
-  isPlaceholderValue,
+  internationalPaymentNotice,
   manualPaymentResponsibility,
   paymentOptions,
   paymentPage,
   paymentRequiredThisWeek,
+  type BankDetailField,
   type PaymentOptionId,
-  wireInstructions,
 } from "@/data/payment-options";
 import { cn } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -119,7 +121,6 @@ export function PaymentOptions() {
 
                 {option.isBank ? (
                   <>
-                    <BankPaymentAmountNotice />
                     <ManualResponsibilityNotice />
                     <BankInstructions showPlanNote={option.isPlan} />
                   </>
@@ -176,22 +177,6 @@ function PaypalPrimaryInstructions() {
   );
 }
 
-function BankPaymentAmountNotice() {
-  return (
-    <div className="mt-8 rounded-sm border border-[var(--line)] bg-cream px-5 py-6 sm:px-7">
-      <h4 className="font-serif text-2xl text-ink">
-        {bankPaymentAmountNotice.heading}
-      </h4>
-      <p className="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
-        {bankPaymentAmountNotice.copy}
-      </p>
-      <p className="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
-        {bankPaymentAmountNotice.uncertain}
-      </p>
-    </div>
-  );
-}
-
 function ManualResponsibilityNotice() {
   return (
     <div className="mt-6 rounded-sm border border-gold/35 bg-cream px-5 py-6 sm:px-7">
@@ -234,14 +219,75 @@ function BankInstructions({ showPlanNote }: { showPlanNote: boolean }) {
   return (
     <div className="mt-8 space-y-8">
       {!paymentPage.bankDetailsFinalized ? <BankPendingNotice /> : null}
-      <InstructionBlock
-        title={achInstructions.label}
-        fields={achInstructions.fields}
+
+      <BankTransferOption
+        optionLabel={domesticWireTransfer.optionLabel}
+        heading={domesticWireTransfer.heading}
+        amountHeading={domesticWireTransfer.amount.heading}
+        amountCopy={domesticWireTransfer.amount.copy}
+        amountUncertain={domesticWireTransfer.amount.uncertain}
+        fields={domesticWireTransfer.fields}
+        note={domesticWireTransfer.note}
       />
-      <InstructionBlock
-        title={wireInstructions.label}
-        fields={wireInstructions.fields}
+
+      <BankTransferOption
+        optionLabel={achBankTransfer.optionLabel}
+        heading={achBankTransfer.heading}
+        amountHeading={achBankTransfer.amount.heading}
+        amountValue={achBankTransfer.amount.value}
+        fields={achBankTransfer.fields}
+        note={achBankTransfer.note}
       />
+
+      <div className="rounded-sm border border-gold/40 bg-cream px-5 py-6 sm:px-7">
+        <h4 className="font-serif text-2xl text-ink">
+          {internationalPaymentNotice.heading}
+        </h4>
+        <p className="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
+          {internationalPaymentNotice.copy}
+        </p>
+      </div>
+
+      <div className="rounded-sm border border-[var(--line)] bg-cream px-5 py-6 sm:px-7">
+        <h4 className="font-serif text-2xl text-ink">
+          {bankPaymentReference.heading}
+        </h4>
+        <p className="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
+          {bankPaymentReference.copy}
+        </p>
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-mono text-base font-medium tracking-wide text-ink sm:text-lg">
+            {bankPaymentReference.value}
+          </p>
+          <CopyButton
+            value={bankPaymentReference.value}
+            label="payment reference"
+          />
+        </div>
+      </div>
+
+      <div className="rounded-sm border border-[var(--line)] bg-cream px-5 py-6 sm:px-7">
+        <h4 className="font-serif text-2xl text-ink">
+          {bankPaymentConfirmation.heading}
+        </h4>
+        <p className="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
+          {bankPaymentConfirmation.copy}
+        </p>
+        <ul className="mt-4 space-y-2">
+          {bankPaymentConfirmation.items.map((item) => (
+            <li
+              key={item}
+              className="flex gap-3 text-base leading-relaxed text-ink-soft before:mt-2 before:block before:size-1.5 before:shrink-0 before:rounded-full before:bg-coral before:content-['']"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">
+          {bankPaymentConfirmation.privacyNote}
+        </p>
+      </div>
+
       {showPlanNote ? (
         <p className="text-base leading-relaxed text-ink-soft">
           {bankPaymentExtras.officialNote}
@@ -251,6 +297,58 @@ function BankInstructions({ showPlanNote }: { showPlanNote: boolean }) {
         {bankPaymentExtras.feeNote}
       </p>
       <ButtonLink href="#payment-request">Confirm My Payment Choice</ButtonLink>
+    </div>
+  );
+}
+
+function BankTransferOption({
+  optionLabel,
+  heading,
+  amountHeading,
+  amountCopy,
+  amountUncertain,
+  amountValue,
+  fields,
+  note,
+}: {
+  optionLabel: string;
+  heading: string;
+  amountHeading: string;
+  amountCopy?: string;
+  amountUncertain?: string;
+  amountValue?: string;
+  fields: BankDetailField[];
+  note: string;
+}) {
+  return (
+    <div className="rounded-sm border border-[var(--line)] bg-cream p-5 sm:p-7">
+      <p className="eyebrow text-coral">{optionLabel}</p>
+      <h4 className="mt-3 font-serif text-2xl text-ink sm:text-3xl">{heading}</h4>
+
+      <div className="mt-6 border-b border-[var(--line-light)] pb-5">
+        <p className="text-sm text-muted">{amountHeading}</p>
+        {amountValue ? (
+          <p className="mt-2 font-serif text-3xl tracking-tight text-jungle">
+            {amountValue}
+          </p>
+        ) : null}
+        {amountCopy ? (
+          <p className="mt-3 text-base leading-relaxed text-ink-soft">
+            {amountCopy}
+          </p>
+        ) : null}
+        {amountUncertain ? (
+          <p className="mt-3 text-base leading-relaxed text-ink-soft">
+            {amountUncertain}
+          </p>
+        ) : null}
+      </div>
+
+      <DetailList fields={fields} />
+
+      <p className="mt-5 text-sm leading-relaxed text-muted sm:text-base">
+        {note}
+      </p>
     </div>
   );
 }
@@ -266,71 +364,58 @@ function BankPendingNotice() {
   );
 }
 
-function InstructionBlock({
-  title,
-  fields,
-}: {
-  title: string;
-  fields: Array<{ label: string; value: string }>;
-}) {
-  const canCopy = paymentPage.bankDetailsFinalized;
-
+function DetailList({ fields }: { fields: BankDetailField[] }) {
   return (
-    <div className="rounded-sm border border-[var(--line)] bg-cream p-5 sm:p-6">
-      <h4 className="font-serif text-2xl text-ink">{title}</h4>
-      <DetailList
-        fields={[
-          ...fields,
-          {
-            label: bankPaymentExtras.paymentAmountLabel,
-            value: bankPaymentExtras.paymentAmountValue,
-          },
-          {
-            label: "Payment reference",
-            value: bankPaymentExtras.paymentReference,
-          },
-        ]}
-        canCopy={canCopy}
-      />
-    </div>
+    <dl className="mt-5 space-y-4">
+      {fields.map((field) => (
+        <div
+          key={`${field.label}-${field.value}`}
+          className="grid gap-1 border-b border-[var(--line-light)] pb-4 last:border-b-0 last:pb-0 sm:grid-cols-[0.85fr_1.15fr] sm:items-start sm:gap-4"
+        >
+          <dt className="text-sm text-muted">{field.label}</dt>
+          <dd className="flex flex-col gap-2 sm:items-end sm:text-right">
+            <BankDetailValue field={field} />
+            {field.copyable ? (
+              <CopyButton value={field.value} label={field.label} />
+            ) : null}
+          </dd>
+        </div>
+      ))}
+    </dl>
   );
 }
 
-function DetailList({
-  fields,
-  canCopy = false,
-}: {
-  fields: Array<{ label: string; value: string }>;
-  canCopy?: boolean;
-}) {
+function BankDetailValue({ field }: { field: BankDetailField }) {
+  if (field.multiline) {
+    return (
+      <span className="whitespace-pre-line text-base font-medium text-ink">
+        {field.value}
+      </span>
+    );
+  }
+
+  if (field.numeric) {
+    return (
+      <span
+        className="font-mono text-base font-semibold tracking-[0.12em] text-ink tabular-nums"
+        // Discourage iOS/Safari from turning routing/account digits into tel links.
+        data-nosnippet
+      >
+        {formatNumericDisplay(field.value)}
+      </span>
+    );
+  }
+
   return (
-    <dl className="mt-5 space-y-4">
-      {fields.map((field) => {
-        const placeholder = isPlaceholderValue(field.value);
-        return (
-          <div
-            key={`${field.label}-${field.value}`}
-            className="grid gap-1 border-b border-[var(--line-light)] pb-4 last:border-b-0 last:pb-0 sm:grid-cols-[0.9fr_1.1fr] sm:items-start sm:gap-4"
-          >
-            <dt className="text-sm text-muted">{field.label}</dt>
-            <dd className="flex flex-col gap-2 sm:items-end sm:text-right">
-              <span
-                className={cn(
-                  "text-base font-medium break-words",
-                  placeholder ? "text-muted" : "text-ink",
-                )}
-              >
-                {field.value}
-              </span>
-              {canCopy && !placeholder ? (
-                <CopyButton value={field.value} label={field.label} />
-              ) : null}
-            </dd>
-          </div>
-        );
-      })}
-    </dl>
+    <span className="text-base font-medium break-words text-ink">
+      {field.value}
+    </span>
   );
+}
+
+/** Insert zero-width spaces so browsers are less likely to auto-link as phone numbers. */
+function formatNumericDisplay(value: string) {
+  return value.split("").join("\u200B");
 }
 
 function CopyButton({ value, label }: { value: string; label: string }) {
