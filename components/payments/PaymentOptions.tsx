@@ -224,8 +224,7 @@ function BankInstructions({ showPlanNote }: { showPlanNote: boolean }) {
         optionLabel={domesticWireTransfer.optionLabel}
         heading={domesticWireTransfer.heading}
         amountHeading={domesticWireTransfer.amount.heading}
-        amountCopy={domesticWireTransfer.amount.copy}
-        amountUncertain={domesticWireTransfer.amount.uncertain}
+        amountValue={domesticWireTransfer.amount.value}
         fields={domesticWireTransfer.fields}
         note={domesticWireTransfer.note}
       />
@@ -305,8 +304,6 @@ function BankTransferOption({
   optionLabel,
   heading,
   amountHeading,
-  amountCopy,
-  amountUncertain,
   amountValue,
   fields,
   note,
@@ -314,9 +311,7 @@ function BankTransferOption({
   optionLabel: string;
   heading: string;
   amountHeading: string;
-  amountCopy?: string;
-  amountUncertain?: string;
-  amountValue?: string;
+  amountValue: string;
   fields: BankDetailField[];
   note: string;
 }) {
@@ -327,21 +322,9 @@ function BankTransferOption({
 
       <div className="mt-6 border-b border-[var(--line-light)] pb-5">
         <p className="text-sm text-muted">{amountHeading}</p>
-        {amountValue ? (
-          <p className="mt-2 font-serif text-3xl tracking-tight text-jungle">
-            {amountValue}
-          </p>
-        ) : null}
-        {amountCopy ? (
-          <p className="mt-3 text-base leading-relaxed text-ink-soft">
-            {amountCopy}
-          </p>
-        ) : null}
-        {amountUncertain ? (
-          <p className="mt-3 text-base leading-relaxed text-ink-soft">
-            {amountUncertain}
-          </p>
-        ) : null}
+        <p className="mt-2 font-serif text-3xl tracking-tight text-jungle">
+          {amountValue}
+        </p>
       </div>
 
       <DetailList fields={fields} />

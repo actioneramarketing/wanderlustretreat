@@ -185,7 +185,7 @@ Confirm or complete the following before public launch:
 - [ ] Confirm final pricing structure
 - [ ] Confirm deposit and payment plans
 - [x] Replace `/payments` ACH/wire placeholders and set `bankDetailsFinalized: true`
-- [ ] Confirm each participant’s payment amount and schedule during their enrollment call (wire amounts are host-confirmed; ACH amount is listed on `/payments`)
+- [ ] Confirm each participant’s payment amount and schedule during their enrollment call (US domestic wire and ACH pay-in-full amount is $7,500 on `/payments`)
 - [ ] Confirm retreat capacity
 - [ ] Confirm airport and transportation details
 - [ ] Confirm leader biographies and portraits

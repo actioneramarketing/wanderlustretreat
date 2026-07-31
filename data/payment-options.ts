@@ -227,8 +227,7 @@ export const domesticWireTransfer = {
   heading: "Domestic Wire Transfer",
   amount: {
     heading: "Amount to Send",
-    copy: "The amount you need to send should have been confirmed during your call with one of the retreat hosts. Send only the amount you were instructed to pay.",
-    uncertain: `If you do not know the correct amount, do not guess. Email ${paymentPage.supportContactName} at ${paymentPage.supportContactEmail} before submitting your payment.`,
+    value: "$7,500",
   },
   fields: usBankSharedFields,
   note: "These details are for a domestic wire transfer from a bank located in the United States.",
@@ -239,7 +238,7 @@ export const achBankTransfer = {
   heading: "ACH Bank Transfer",
   amount: {
     heading: "Amount to Send",
-    value: "$7,722",
+    value: "$7,500",
   },
   fields: usBankSharedFields,
   note: "These details are for an ACH transfer from a bank located in the United States.",
