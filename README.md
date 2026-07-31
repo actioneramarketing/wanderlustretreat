@@ -28,6 +28,8 @@ cp .env.example .env.local
 | `NEXT_PUBLIC_SITE_URL` | Recommended for production | Canonical URL, Open Graph absolute image URLs, sitemap, robots |
 | `RESEND_API_KEY` | Required for inquiry email | Resend API authentication |
 | `RETREAT_INQUIRY_TO_EMAIL` | Required for inquiry email | Inbox that receives inquiries |
+| `RETREAT_LEADER_APPLICATION_TO_EMAIL` | Optional | Leader applications (falls back to inquiry inbox) |
+| `RETREAT_PAYMENT_TO_EMAIL` | Optional | Payment selections (falls back to inquiry inbox) |
 | `RETREAT_INQUIRY_FROM_EMAIL` | Required for inquiry email | Verified Resend sender address |
 
 #### `NEXT_PUBLIC_SITE_URL`
@@ -113,6 +115,18 @@ Most content is centralized so you do not need to hunt through large JSX files:
 | `data/faqs.ts` | FAQ content |
 | `data/content.ts` | Shared section copy |
 | `data/images.ts` | Image paths, alt text, future photo placeholders |
+| `data/leader-opportunity.ts` | Leader recruitment page content and commitment model |
+| `data/payment-options.ts` | Invitation-only `/payments` options, bank placeholders, PayPal details |
+
+### Unlisted payment page
+
+The `/payments` route is intentionally unlisted and noindexed, but anyone with the URL may still access it. Noindex is not authentication.
+
+- Not linked in desktop or mobile navigation
+- Not included in `app/sitemap.ts`
+- Uses `robots: { index: false, follow: false }`
+- Edit payment amounts, bank placeholders, and PayPal details in `data/payment-options.ts`
+- Set `bankDetailsFinalized: true` only after verified bank instructions are supplied
 
 ### Confirmed retreat dates
 
@@ -168,6 +182,8 @@ Confirm or complete the following before public launch:
 - [x] Confirm retreat year — May 30–June 6, 2027
 - [ ] Confirm final pricing structure
 - [ ] Confirm deposit and payment plans
+- [ ] Replace `/payments` ACH/wire placeholders and set `bankDetailsFinalized: true`
+- [ ] Confirm payment-plan installment amounts and due dates in `data/payment-options.ts`
 - [ ] Confirm retreat capacity
 - [ ] Confirm airport and transportation details
 - [ ] Confirm leader biographies and portraits

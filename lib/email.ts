@@ -264,3 +264,108 @@ export function buildConfirmationEmailHtml(firstName: string): string {
   </body>
 </html>`;
 }
+
+export type PaymentSelectionPayload = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  country: string;
+  invitingLeader: string;
+  selectedOption: string;
+  selectedOptionLabel: string;
+  bankTransferMethod: string;
+  paymentStatus: string;
+  amountAlreadySent: string;
+  paymentDate: string;
+  transactionReference: string;
+  questions: string;
+  submittedAt: string;
+};
+
+export function buildPaymentSelectionEmailHtml(
+  data: PaymentSelectionPayload,
+): string {
+  const sections = [
+    emailSection("Participant details", [
+      ["First name", data.firstName],
+      ["Last name", data.lastName],
+      ["Email", data.email],
+      ["Phone", data.phone],
+      ["Country", data.country],
+    ]),
+    emailSection("Inviting Retreat Leader", [
+      ["Retreat Leader", data.invitingLeader],
+    ]),
+    emailSection("Selected payment option", [
+      ["Option", data.selectedOptionLabel],
+      ["Option id", data.selectedOption],
+      ["ACH/wire preference", data.bankTransferMethod || "—"],
+    ]),
+    emailSection("Payment status", [
+      ["Status", data.paymentStatus],
+      ["Amount already sent", data.amountAlreadySent || "—"],
+      ["Payment date", data.paymentDate || "—"],
+      ["Transaction reference", data.transactionReference || "—"],
+    ]),
+    emailSection("Questions", [["Questions", data.questions || "—"]]),
+    emailSection("Submission", [["Submitted at", data.submittedAt]]),
+  ].join("");
+
+  return `<!DOCTYPE html>
+<html>
+  <body style="margin:0;padding:0;background:#f7f3eb;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f3eb;padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" style="max-width:680px;background:#ffffff;border:1px solid #e8dfd0;border-radius:8px;overflow:hidden;">
+            <tr>
+              <td style="background:#1a2e24;padding:28px 24px;">
+                <p style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#b8a06a;">Payment Selection</p>
+                <h1 style="margin:0;font-family:Georgia,serif;font-size:26px;font-weight:400;color:#f7f3eb;line-height:1.25;">The Wanderlust Revival Retreat</h1>
+              </td>
+            </tr>
+            ${sections}
+            <tr>
+              <td style="padding:20px 16px 28px;font-family:Arial,sans-serif;font-size:12px;color:#6b6258;">
+                Submitted via the invitation-only payment page. Form submission alone does not secure participation.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+}
+
+export function buildPaymentSelectionConfirmationHtml(
+  firstName: string,
+): string {
+  const name = escapeHtml(firstName);
+  return `<!DOCTYPE html>
+<html>
+  <body style="margin:0;padding:0;background:#f7f3eb;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f3eb;padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" style="max-width:560px;background:#ffffff;border:1px solid #e8dfd0;border-radius:8px;">
+            <tr>
+              <td style="padding:36px 28px;">
+                <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#4a7c7a;">The Wanderlust Revival Retreat</p>
+                <h1 style="margin:0 0 16px;font-family:Georgia,serif;font-size:28px;font-weight:400;color:#1a2e24;">Thank you, ${name}.</h1>
+                <p style="margin:0 0 12px;font-family:Arial,sans-serif;font-size:16px;line-height:1.65;color:#3d4a42;">
+                  Your payment selection has been received. The retreat team will review it and send any required payment instructions, agreement, invoice, or next steps.
+                </p>
+                <p style="margin:0;font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#6b6258;">
+                  Submitting this form does not by itself secure your place. Please also notify the Retreat Leader who invited you after you complete payment.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+}

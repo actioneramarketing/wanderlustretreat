@@ -12,8 +12,15 @@ export function MobileStickyCta() {
   const [visible, setVisible] = useState(false);
   const reduceMotion = useReducedMotion();
   const isLeadersPage = pathname === "/leaders";
+  const isPaymentsPage =
+    pathname === "/payments" || pathname?.startsWith("/payments/");
 
   useEffect(() => {
+    if (isPaymentsPage) {
+      setVisible(false);
+      return;
+    }
+
     const formAnchor = document.getElementById(
       isLeadersPage ? "leader-application" : "invitation",
     );
@@ -42,7 +49,11 @@ export function MobileStickyCta() {
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
-  }, [isLeadersPage]);
+  }, [isLeadersPage, isPaymentsPage]);
+
+  if (isPaymentsPage) {
+    return null;
+  }
 
   const cta = isLeadersPage
     ? {
